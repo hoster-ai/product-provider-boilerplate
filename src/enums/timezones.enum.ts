@@ -1,4 +1,5 @@
 export enum TimeZones {
+  //all GMT timezone enums
   gmt12minus = "GTM-12",
   gmt11minus = "GTM-11",
   gmt10minus = "GTM-10",

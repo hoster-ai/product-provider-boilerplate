@@ -9,5 +9,5 @@ export class ChargeResponseDto {
   @ApiResponseProperty({
     example: { cpu: 1, ram: 2 },
   })
-  variants: { [key: string]: string | number };
+  variants: Record<string, string|number>;
 }

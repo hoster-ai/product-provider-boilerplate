@@ -10,6 +10,7 @@ import { JwtPayloadRequest } from "src/dtos/jwt-payload.request";
 
 @Injectable()
 export class senderIsHoster implements NestInterceptor {
+  //check if the sender is indeed Hoster
   intercept(context: ExecutionContext, next: CallHandler): Observable<any> {
     const request: Request & JwtPayloadRequest = context
       .switchToHttp()
@@ -17,7 +18,7 @@ export class senderIsHoster implements NestInterceptor {
 
     if (request.user.sender !== "hoster") {
       throw new ForbiddenException(
-        "You have not necessary privilege for this action",
+        "You do not have the neccessary access for this action",
       );
     }
 
@@ -27,6 +28,7 @@ export class senderIsHoster implements NestInterceptor {
 
 @Injectable()
 export class hasAdminRights implements NestInterceptor {
+  //check the access level of the sender
   intercept(context: ExecutionContext, next: CallHandler): Observable<any> {
     const request: Request & JwtPayloadRequest = context
       .switchToHttp()

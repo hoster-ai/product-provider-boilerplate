@@ -1,4 +1,5 @@
 export enum DurationEnum {
+  // duration is always calculated in months
   ONE_MONTH = "1",
   TWO_MONTHS = "2",
   THREE_MONTHS = "3",

@@ -9,16 +9,19 @@ import { Mongoose, connect, disconnect, set } from "mongoose";
   providers: [ConfigService], //services
   exports: [],
 })
+
 export class MongoModule implements OnModuleDestroy {
   private connection: Mongoose;
 
   constructor(private config: ConfigService) {}
 
   async onModuleInit() {
+    // Connect to Mongo Database
     set("strictQuery", false);
     this.connection = await connect(this.config.get("MONGO_URL"));
   }
   async onModuleDestroy() {
+    // Disconnect from Mongo Database
     disconnect();
   }
 }

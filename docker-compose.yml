@@ -3,9 +3,9 @@ services:
   mongodb:
     image: mongo:4.4.6
     environment:
-      MONGO_INITDB_DATABASE: "azura"
-      MONGO_INITDB_ROOT_PASSWORD: "secret"
-      MONGO_INITDB_ROOT_USERNAME: "root"
+      MONGO_INITDB_DATABASE: "azura" 
+      MONGO_INITDB_ROOT_PASSWORD: "secret" # You SHOULD change this to any password you wish
+      MONGO_INITDB_ROOT_USERNAME: "root" # You can change this to any username you wish
     ports:
-      - 27017:27017
+      - 27017:27017 # you can change this to any port you wish
 

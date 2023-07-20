@@ -21,16 +21,7 @@ export class RequestDto {
   previousProductData?: ProductDataDto;
 }
 
-
-// export class InstallRequestDto {
-//   @IsDefined()
-//   @IsObject()
-//   @ApiProperty({ type: UserDataDto })
-//   userData: UserDataDto;
-// }
-
 export class AddonsRequestDto {
-
   @ApiProperty({
     type: String,
     description: "id of Addon Feature that requires remote validation.",

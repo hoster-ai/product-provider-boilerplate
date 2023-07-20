@@ -1,4 +1,5 @@
 export enum CountryEnum {
+  //all country enums. use as required
   AFGHANISTAN = "AF",
   ALBANIA = "AL",
   ALGERIA = "DZ",

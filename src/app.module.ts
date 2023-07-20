@@ -4,11 +4,7 @@ import { AppController } from "./app.controller";
 import { AuthModule } from "./auth/auth.module";
 import { HttpModule } from "@nestjs/axios";
 import { MongoModule } from "./mongo/mongo.module";
-import { AzuraService } from "./services/azura.service";
-import { AzuraClientService } from "./services/azura.client.service";
-import { AzuraServerService } from "./services/azura.servers.service";
-import { ServerSettingsController } from "./server-settings.controller";
-import { StationController } from "./station.controller";
+
 
 @Module({
   imports: [
@@ -19,7 +15,7 @@ import { StationController } from "./station.controller";
     }),
     HttpModule,
   ],
-  controllers: [AppController, ServerSettingsController, StationController],
-  providers: [AzuraClientService, AzuraService, AzuraServerService],
+  controllers: [AppController, /**your Controllers here*/],
+  providers: [/**your Services here */],
 })
 export class AppModule {}
