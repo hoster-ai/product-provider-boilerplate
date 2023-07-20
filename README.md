@@ -10,8 +10,8 @@ $ npm -g npm-check-updates
 
 # Node and npm versions
 
-Node: 20.3.1
-npm: 8.19.4
+- Node: 20.3.1
+- npm: 8.19.4
 
 ## Running the app
 
