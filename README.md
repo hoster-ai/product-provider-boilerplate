@@ -79,7 +79,7 @@ $ npm run test:cov
 
 ## Build docker
 ```bash
-docker build . -t azuracast
+docker build . -t <name-of-your-project>
 ```
 
 ### Run docker
@@ -89,6 +89,6 @@ docker run \
   -e SERVICE_PROVIDER_TOKEN=test \
   -e API_KEY_AZURE="xxxxxxxxxxx:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" \
   -e PORT=3001 \
-  -e MONGO_URL="mongodb://root:secret@localhost:27017" \
+  -e MONGO_URL="mongodb://<username>:<password>@localhost:27017" \
   azuracast
 ```
