@@ -8,7 +8,6 @@ import { MongoModule } from "./mongo/mongo.module";
 
 @Module({
   imports: [
-    MongoModule,
     AuthModule,
     ConfigModule.forRoot({
       isGlobal: true,
