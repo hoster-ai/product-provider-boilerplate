@@ -5,7 +5,7 @@
 
 ```bash
 $ npm install
-$ npm -g npm-check-updates
+$ npm install -g npm-check-updates
 ```
 
 # Node and npm versions
