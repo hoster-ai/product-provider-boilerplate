@@ -59,8 +59,9 @@ export class RequestOptionalPreviousDto extends IntersectionType(
 @UseInterceptors(senderIsHoster)
 @ApiUnauthorizedResponse({ status: 401, description: "Unauthorized" })
 export class AppController {
-  constructor() {
+  constructor(
     //initialize your services here
+  ) {
   }
 
   /**
