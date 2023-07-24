@@ -50,7 +50,7 @@ export class RequestCreateDto extends OmitType(RequestDto, [
 ] as const) {}
 export class RequestOptionalPreviousDto extends IntersectionType(
   OmitType(RequestDto, ["previousProductData"] as const),
-  PartialType(OmitType(RequestDto, ["productData", "userData"] as const)),
+  PartialType(OmitType(RequestDto, ["productData", "userData"] as const))
 ) {}
 
 @Controller()
@@ -59,10 +59,8 @@ export class RequestOptionalPreviousDto extends IntersectionType(
 @UseInterceptors(senderIsHoster)
 @ApiUnauthorizedResponse({ status: 401, description: "Unauthorized" })
 export class AppController {
-  constructor(
-    //initialize your services here
-  ) {
-  }
+  constructor() //initialize your services here
+  {}
 
   /**
    * @returns ProviderInfoResponseDto
@@ -78,12 +76,9 @@ export class AppController {
   @HttpCode(200)
   @Get("info")
   async info(
-    @Request() request: Request & JwtPayloadRequest,
+    @Request() request: Request & JwtPayloadRequest
   ): Promise<InfoResponseDto | ErrorResponseDto> {
-    
     return {
-      code: 200,
-      message: "Ok",
       info: {
         name: "MyProduct",
 
@@ -111,14 +106,11 @@ export class AppController {
   @Post("create")
   public async create(
     @Request() request: Request & JwtPayloadRequest,
-    @Body() requestBody: RequestCreateDto,
+    @Body() requestBody: RequestCreateDto
   ): Promise<MetaResponseDto | TaskResponseDto | ErrorResponseDto> {
     //Perform all necessary actions here
-  
 
     return {
-      code: 201,
-      message: "Ok",
       meta: {
         //your meta data
       },
@@ -143,13 +135,11 @@ export class AppController {
   @HttpCode(200)
   async renew(
     @Request() request: Request & JwtPayloadRequest,
-    @Body() requestBody: RequestDto,
+    @Body() requestBody: RequestDto
   ): Promise<MetaResponseDto | TaskResponseDto | ErrorResponseDto> {
     //Perform all necessary actions here
 
     return {
-      code: 200,
-      message: "Ok",
       meta: {
         //your meta data
       },
@@ -174,13 +164,11 @@ export class AppController {
   @HttpCode(200)
   async upgrade(
     @Request() request: Request & JwtPayloadRequest,
-    @Body() requestBody: RequestDto,
+    @Body() requestBody: RequestDto
   ): Promise<MetaResponseDto | TaskResponseDto | ErrorResponseDto> {
     //Perform all necessary actions here
 
     return {
-      code: 200,
-      message: "Ok",
       meta: {
         //your meta data
       },
@@ -205,13 +193,11 @@ export class AppController {
   @HttpCode(200)
   async downgrade(
     @Request() request: Request & JwtPayloadRequest,
-    @Body() requestBody: RequestDto,
+    @Body() requestBody: RequestDto
   ): Promise<MetaResponseDto | TaskResponseDto | ErrorResponseDto> {
     //Perform all necessary actions here
 
     return {
-      code: 200,
-      message: "Ok",
       meta: {
         // your meta data
       },
@@ -236,13 +222,11 @@ export class AppController {
   @Post("suspend")
   async suspend(
     @Request() request: Request & JwtPayloadRequest,
-    @Body() requestBody: RequestOptionalPreviousDto,
+    @Body() requestBody: RequestOptionalPreviousDto
   ): Promise<MetaResponseDto | TaskResponseDto | ErrorResponseDto> {
     //Perform all necessary actions here
 
     return {
-      code: 200,
-      message: "Ok",
       meta: {
         //your meta data
       },
@@ -267,13 +251,11 @@ export class AppController {
   @Post("unsuspend")
   async unsuspend(
     @Request() request: Request & JwtPayloadRequest,
-    @Body() requestBody: RequestOptionalPreviousDto,
+    @Body() requestBody: RequestOptionalPreviousDto
   ): Promise<MetaResponseDto | TaskResponseDto | ErrorResponseDto> {
     //Perform all necessary actions here
 
     return {
-      code: 200,
-      message: "Ok",
       meta: {
         //your meta data
       },
@@ -297,15 +279,13 @@ export class AppController {
   })
   @HttpCode(200)
   async upgradable(
-    @Body() requestBody: RequestDto,
+    @Body() requestBody: RequestDto
   ): Promise<BooleanResponseDto | ErrorResponseDto> {
     //Perform all necessary actions here
 
     return await Promise.all([])
       .then(() => {
         return {
-          code: 200,
-          message: "Ok",
           result: true,
         };
       })
@@ -331,15 +311,13 @@ export class AppController {
   })
   @HttpCode(200)
   async downgradable(
-    @Body() requestBody: RequestDto,
+    @Body() requestBody: RequestDto
   ): Promise<BooleanResponseDto | ErrorResponseDto> {
     //Perform all necessary actions here
 
     return await Promise.all([])
       .then(() => {
         return {
-          code: 200,
-          message: "Ok",
           result: true,
         };
       })
@@ -366,15 +344,13 @@ export class AppController {
   @HttpCode(200)
   async delete(
     @Request() request: Request & JwtPayloadRequest,
-    @Body() requestBody: RequestDto,
+    @Body() requestBody: RequestDto
   ): Promise<BooleanResponseDto | ErrorResponseDto> {
     //Perform all necessary actions here
 
     return await Promise.all([])
       .then(() => {
         return {
-          code: 200,
-          message: "Ok",
           result: true,
         };
       })
@@ -400,20 +376,18 @@ export class AppController {
   })
   @HttpCode(200)
   async validateAddons(
-    @Body() requestBody: AddonsRequestDto,
+    @Body() requestBody: AddonsRequestDto
   ): Promise<BooleanResponseDto | ErrorResponseDto> {
     //Perform all necessary actions here
 
     return {
-      code: 200,
-      message: "Ok",
       result: true,
     };
   }
 
   /**
    * @returns Promise with BooleanResponseDto|ErrorResponse
-  */
+   */
   @ApiTags("Product")
   @ApiOperation({
     description:
@@ -427,13 +401,11 @@ export class AppController {
   @HttpCode(200)
   async validateActionFields(
     @Request() request: Request & JwtPayloadRequest,
-    @Body() requestBody: ActionFieldsRequestDto,
+    @Body() requestBody: ActionFieldsRequestDto
   ): Promise<BooleanResponseDto | ErrorResponseDto> {
     //Perform all necessary actions here
 
     return {
-      code: 200,
-      message: "Ok",
       result: true,
     };
   }
@@ -447,8 +419,6 @@ export class AppController {
     //Perform all necessary actions here
 
     return {
-      code: 200,
-      message: "Success",
       result: true,
     };
   }
@@ -462,8 +432,6 @@ export class AppController {
     //Perform all necessary actions here
 
     return {
-      code: 200,
-      message: "Success",
       result: true,
     };
   }

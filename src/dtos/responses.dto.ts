@@ -1,28 +1,16 @@
 import { ApiProperty, ApiResponseProperty } from "@nestjs/swagger";
 import { ProviderInfoDto } from "./provider-info.dto";
 
-export class BaseResponse {
-  @ApiResponseProperty({
-    type: Number,
-    example: 200,
-  })
-  code: number;
 
-  @ApiResponseProperty({
-    type: String,
-    example: "Ok",
-  })
-  message: string;
-}
 
-export class InfoResponseDto extends BaseResponse {
+export class InfoResponseDto {
   @ApiProperty({
     type: ProviderInfoDto,
   })
   info: ProviderInfoDto;
 }
 
-export class MetaResponseDto extends BaseResponse {
+export class MetaResponseDto  {
   @ApiProperty({
     type: Object,
     additionalProperties: { type: 'string' },
@@ -44,7 +32,7 @@ export class MetaResponseDto extends BaseResponse {
   meta?: Record<string, any>;
 }
 
-export class TaskResponseDto extends BaseResponse{
+export class TaskResponseDto {
   @ApiProperty({
     type: String,
     required:true,
@@ -54,7 +42,7 @@ export class TaskResponseDto extends BaseResponse{
   taskId: String;
 }
 
-export class ErrorResponseDto extends BaseResponse {
+export class ErrorResponseDto  {
   @ApiResponseProperty({
     type: [String] || String,
     example: "Not implemented",
@@ -62,7 +50,7 @@ export class ErrorResponseDto extends BaseResponse {
   errors?: string[] | string;
 }
 
-export class BooleanResponseDto extends BaseResponse {
+export class BooleanResponseDto {
   @ApiResponseProperty({
     type: Boolean,
     example: true,
