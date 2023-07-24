@@ -144,7 +144,7 @@ export class AppController {
   async renew(
     @Request() request: Request & JwtPayloadRequest,
     @Body() requestBody: RequestDto,
-  ): Promise<MetaResponseDto | MetaResponseDto | ErrorResponseDto> {
+  ): Promise<MetaResponseDto | TaskResponseDto | ErrorResponseDto> {
     //Perform all necessary actions here
 
     return {
@@ -175,7 +175,7 @@ export class AppController {
   async upgrade(
     @Request() request: Request & JwtPayloadRequest,
     @Body() requestBody: RequestDto,
-  ): Promise<MetaResponseDto | MetaResponseDto | ErrorResponseDto> {
+  ): Promise<MetaResponseDto | TaskResponseDto | ErrorResponseDto> {
     //Perform all necessary actions here
 
     return {
@@ -237,7 +237,7 @@ export class AppController {
   async suspend(
     @Request() request: Request & JwtPayloadRequest,
     @Body() requestBody: RequestOptionalPreviousDto,
-  ): Promise<MetaResponseDto | MetaResponseDto | ErrorResponseDto> {
+  ): Promise<MetaResponseDto | TaskResponseDto | ErrorResponseDto> {
     //Perform all necessary actions here
 
     return {
@@ -268,7 +268,7 @@ export class AppController {
   async unsuspend(
     @Request() request: Request & JwtPayloadRequest,
     @Body() requestBody: RequestOptionalPreviousDto,
-  ): Promise<MetaResponseDto | MetaResponseDto | ErrorResponseDto> {
+  ): Promise<MetaResponseDto | TaskResponseDto | ErrorResponseDto> {
     //Perform all necessary actions here
 
     return {
