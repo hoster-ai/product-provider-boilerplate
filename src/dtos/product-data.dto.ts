@@ -72,7 +72,7 @@ export class ProductDataDto {
     additionalProperties: {type: "string"},
     title: "Product meta",
     example: { station_id: "example_id", max_listeners: 15, disc_usage: "1G", },
-    description: 'These are any/all information the provider requires to know about a specific product instance that is owned by a specific user. They are kept by the Hoster, and sent back on every post. The <*>(key) is the name of feature as a key and the value is the (description of the feature or)value of that feature'
+    description: 'These are any/all information the provider requires to know about a specific product instance that is owned by a specific user. They are kept by the Hoster, and sent back on every post. The <*>(key) is the name of feature as a key and the value is the (description of the feature or)value of that feature.This information is stored on the Hoster and are sent back to the Provider in every POST'
   })
   meta: Record<string, any>;
 
