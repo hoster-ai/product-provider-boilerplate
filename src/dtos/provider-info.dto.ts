@@ -240,7 +240,7 @@ export class ProviderInfoDto {
     }],
     required: true,
     readOnly: true,
-    description: "These are all necessary information of the Product and are returned during Product creation. The <*>(key) is the name of the information and the value(string) is the description of it. For example when an azuracast station product is created the returnMetaKeys will be station_id,name, login_url,login_email,login_password,source_password,port,mount_point.This information is stored on the Hoster and are sent back to the Provider in every POST"
+    description: "These are all necessary information of the Product and are returned during Product creation. The <*>(key) is the name of the information and the value(string) is the description of it. For example when an azuracast station product is created the returnMetaKeys will be station_id,name, login_url,login_email,login_password,source_password,port,mount_point."
   })
   returnMetaKeys?: Record<string, string>;
 }
