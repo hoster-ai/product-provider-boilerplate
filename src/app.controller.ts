@@ -294,21 +294,17 @@ export class AppController {
 
   @Post("install")
   @HttpCode(200)
-  async install(): Promise<ValidateResponseDto | ErrorResponseDto> {
+  async install(): Promise<null | ErrorResponseDto> {
     //Perform all necessary actions here
 
-    return {
-      result: true,
-    };
+    return {};
   }
 
   @Post("uninstall")
   @HttpCode(200)
-  async uninstall(): Promise<ValidateResponseDto | ErrorResponseDto> {
+  async uninstall(): Promise<null | ErrorResponseDto> {
     //Perform all necessary actions here
 
-    return {
-      result: true,
-    };
+    return {};
   }
 }
