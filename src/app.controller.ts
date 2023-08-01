@@ -30,13 +30,12 @@ import {
 } from "@nestjs/swagger";
 
 import {
-  ActionFieldsRequestDto,
-  AddonsRequestDto,
+  ValidateRequestDto,
   RequestDto,
 } from "./dtos/request.dto";
 import {
   MetaResponseDto,
-  BooleanResponseDto,
+  ValidateResponseDto,
   InfoResponseDto,
   TaskResponseDto,
   ErrorResponseDto,
@@ -111,6 +110,7 @@ export class AppController {
     //Perform all necessary actions here
 
     return {
+      id: "hoster_order_product_id",
       meta: {
         //your meta data
       },
@@ -140,6 +140,7 @@ export class AppController {
     //Perform all necessary actions here
 
     return {
+      id: "hoster_order_product_id",
       meta: {
         //your meta data
       },
@@ -169,6 +170,7 @@ export class AppController {
     //Perform all necessary actions here
 
     return {
+      id: "hoster_order_product_id",
       meta: {
         //your meta data
       },
@@ -198,6 +200,7 @@ export class AppController {
     //Perform all necessary actions here
 
     return {
+      id: "hoster_order_product_id",
       meta: {
         // your meta data
       },
@@ -227,6 +230,7 @@ export class AppController {
     //Perform all necessary actions here
 
     return {
+      id: "hoster_order_product_id",
       meta: {
         //your meta data
       },
@@ -256,6 +260,7 @@ export class AppController {
     //Perform all necessary actions here
 
     return {
+      id: "hoster_order_product_id",
       meta: {
         //your meta data
       },
@@ -275,12 +280,12 @@ export class AppController {
   })
   @Post("upgradable")
   @ApiOkResponse({
-    schema: { oneOf: refs(BooleanResponseDto, ErrorResponseDto) },
+    schema: { oneOf: refs(ValidateResponseDto, ErrorResponseDto) },
   })
   @HttpCode(200)
   async upgradable(
     @Body() requestBody: RequestDto
-  ): Promise<BooleanResponseDto | ErrorResponseDto> {
+  ): Promise<ValidateResponseDto | ErrorResponseDto> {
     //Perform all necessary actions here
 
     return await Promise.all([])
@@ -307,12 +312,12 @@ export class AppController {
   })
   @Post("downgradable")
   @ApiOkResponse({
-    schema: { oneOf: refs(BooleanResponseDto, ErrorResponseDto) },
+    schema: { oneOf: refs(ValidateResponseDto, ErrorResponseDto) },
   })
   @HttpCode(200)
   async downgradable(
     @Body() requestBody: RequestDto
-  ): Promise<BooleanResponseDto | ErrorResponseDto> {
+  ): Promise<ValidateResponseDto | ErrorResponseDto> {
     //Perform all necessary actions here
 
     return await Promise.all([])
@@ -345,7 +350,7 @@ export class AppController {
   async delete(
     @Request() request: Request & JwtPayloadRequest,
     @Body() requestBody: RequestDto
-  ): Promise<BooleanResponseDto | ErrorResponseDto> {
+  ): Promise<ValidateResponseDto | ErrorResponseDto> {
     //Perform all necessary actions here
 
     return await Promise.all([])
@@ -372,12 +377,12 @@ export class AppController {
   })
   @Post("validate/addons")
   @ApiOkResponse({
-    schema: { oneOf: refs(BooleanResponseDto, ErrorResponseDto) },
+    schema: { oneOf: refs(ValidateResponseDto, ErrorResponseDto) },
   })
   @HttpCode(200)
   async validateAddons(
-    @Body() requestBody: AddonsRequestDto
-  ): Promise<BooleanResponseDto | ErrorResponseDto> {
+    @Body() requestBody: ValidateRequestDto
+  ): Promise<ValidateResponseDto | ErrorResponseDto> {
     //Perform all necessary actions here
 
     return {
@@ -396,13 +401,13 @@ export class AppController {
   })
   @Post("validate/action-fields")
   @ApiOkResponse({
-    schema: { oneOf: refs(BooleanResponseDto, ErrorResponseDto) },
+    schema: { oneOf: refs(ValidateResponseDto, ErrorResponseDto) },
   })
   @HttpCode(200)
   async validateActionFields(
     @Request() request: Request & JwtPayloadRequest,
-    @Body() requestBody: ActionFieldsRequestDto
-  ): Promise<BooleanResponseDto | ErrorResponseDto> {
+    @Body() requestBody: ValidateRequestDto
+  ): Promise<ValidateResponseDto | ErrorResponseDto> {
     //Perform all necessary actions here
 
     return {
@@ -415,7 +420,7 @@ export class AppController {
   @ApiOperation({ summary: "Install the provider to the Hoster." })
   @ApiNoContentResponse({ description: "No Content" })
   @HttpCode(200)
-  async install(): Promise<BooleanResponseDto | ErrorResponseDto> {
+  async install(): Promise<ValidateResponseDto | ErrorResponseDto> {
     //Perform all necessary actions here
 
     return {
@@ -428,7 +433,7 @@ export class AppController {
   @ApiOperation({ summary: "Uninstall the provider from the Hoster." })
   @ApiNoContentResponse({ description: "No Content" })
   @HttpCode(200)
-  async uninstall(): Promise<BooleanResponseDto | ErrorResponseDto> {
+  async uninstall(): Promise<ValidateResponseDto | ErrorResponseDto> {
     //Perform all necessary actions here
 
     return {

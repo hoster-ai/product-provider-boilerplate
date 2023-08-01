@@ -4,7 +4,7 @@ import { SwaggerModule, DocumentBuilder } from "@nestjs/swagger";
 import { ValidationError } from "class-validator";
 import { AppModule } from "./app.module";
 import { FieldDto } from "./dtos/field.dto";
-import { BooleanResponseDto, ErrorResponseDto, InfoResponseDto, MetaResponseDto, TaskResponseDto } from "./dtos/responses.dto";
+import { ValidateResponseDto, ErrorResponseDto, InfoResponseDto, MetaResponseDto, TaskResponseDto } from "./dtos/responses.dto";
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
@@ -36,7 +36,7 @@ async function bootstrap() {
       MetaResponseDto,
       ErrorResponseDto,
       InfoResponseDto,
-      BooleanResponseDto]});// here you can declare any extra models you create and add them to the swagger api
+      ValidateResponseDto]});// here you can declare any extra models you create and add them to the swagger api
   SwaggerModule.setup("api", app, document); 
 
   app.enableCors({origin: 'http//:hoster.ai'});// here you can set any origin points you wish to give access to, as well as any other Cors functionality

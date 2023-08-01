@@ -1,6 +1,7 @@
 import { ApiProperty, ApiResponseProperty } from "@nestjs/swagger";
 import { ProviderInfoDto } from "./provider-info.dto";
 import { IsMongoId } from "class-validator";
+import { FieldDto } from "./field.dto";
 
 
 
@@ -60,10 +61,11 @@ export class ErrorResponseDto  {
   errors?: string[] | string;
 }
 
-export class BooleanResponseDto {
+export class ValidateResponseDto {
   @ApiResponseProperty({
     type: Boolean,
     example: true,
   })
   result: boolean;
+  fields?: FieldDto[];
 }
