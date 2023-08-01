@@ -120,10 +120,10 @@ export class ProviderInfoDto {
     ],
     required: true,
     description:
-      "Here we describe to the Hoster which features(fields) the Seller will have available(must fill in) when creating a product on the Hoster. This means the Seller can create products with different characteristics. For example, if the Provider is an Azuracast server, then the Seller will need to fill in his Products the maximum number of listeners and the disc he will have available on a specific Product(i.e. station) for the User(Customer) to upload songs. Each actionField is an Object containing all the relevant information of a feature",
+      "Here we describe to the Hoster which features(fields) the Seller will have available(must fill in) when creating a product on the Hoster. This means the Seller can create products with different characteristics. For example, if the Provider is an Azuracast server, then the Seller will need to fill in his Products the maximum number of listeners and the disc he will have available on a specific Product(i.e. station) for the User(Customer) to upload songs. Each product attribute is an Object containing all the relevant information of a feature",
     title: "Product Attributes/Features"
   })
-  actionFields?: FieldDto[];
+  product_attributes?: FieldDto[];
 
   @ApiProperty({
     type: [FieldDto],

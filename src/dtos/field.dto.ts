@@ -33,7 +33,7 @@ export class FieldDto {
       { type: 'string' },
       { type: 'number' },
       { type: 'object', additionalProperties:true },
-      { type: 'null'  }
+      // { type: 'null'  }
     ],
     description: "Set default value of the product/service feature.",
     default: null,

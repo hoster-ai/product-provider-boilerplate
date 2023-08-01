@@ -56,25 +56,25 @@ export class ProductDataDto {
   @ApiProperty({
     type: Object,
     additionalProperties: true,
-    title: "Product options",
+    title: "Item Attributes",
     example: {
       max_listeners: 15,
       hdd: '1G',
       station_name: 'MyStation'
     },
-    description: 'Options are all the features of the specific product. Theses features include both the features of the product as chosen by the seller when creating the product, as well as any features selected by the user when buying the Prooduct. The <*>(key) is the name of the feature as a key and the value is of <b>any</b> type'
+    description: 'item_attributes are all the attributes of the specific product. These are the attributes of the product as chosen by the seller when creating it. The key is the name of the attribute as a key and the value is of <b>any</b> type'
   })
-  options: Record<string, any>;
+  item_attributes: Record<string, any>;
 
   @IsDefined()
   @ApiProperty({
     type: Object,
-    additionalProperties: {type: "string"},
-    title: "Product meta",
+    additionalProperties: true,
+    title: "Item Addons",
     example: { station_id: "example_id", max_listeners: 15, disc_usage: "1G", },
-    description: 'These are any/all information the provider requires to know about a specific product instance that is owned by a specific user. They are kept by the Hoster, and sent back on every post. The <*>(key) is the name of feature as a key and the value is the (description of the feature or)value of that feature.This information is stored on the Hoster and are sent back to the Provider in every POST'
+    description: 'addons are all the addons of the specific product. These are the addons of the product as chosen by the customer during purchase. The key is the name of addon as a key and the value is of <b>any</b>.'
   })
-  meta: Record<string, any>;
+  addons: Record<string, any>;
 
 
   @IsDefined()
