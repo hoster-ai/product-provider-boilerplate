@@ -108,4 +108,11 @@ export class FieldDto {
   })
   remoteValidation: boolean;
 
+  @ApiProperty({
+    description: 'If dynamic addon is set to true it means that this particular addon/attribute is dynamic and its values depend on other attributes/addons. This will trigger a call from the hoster to the integration in the dynamic-addon path, which will return the actual fields affected.',
+    example: true,
+    title: 'Dynamic Addon'
+  })
+  dynamicAddon?: boolean = false;
+
 }

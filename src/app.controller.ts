@@ -43,7 +43,7 @@ import {
 
 import { AuthGuard } from "./auth/auth.guard";
 import { JwtPayloadRequest } from "./dtos/jwt-payload.request";
-import { senderIsHoster } from "./auth/auth.interceptors";
+import { hasAdminRights, senderIsHoster } from "./auth/auth.interceptors";
 export class RequestCreateDto extends OmitType(RequestDto, [
   "previousProductData",
 ] as const) {}
@@ -55,7 +55,7 @@ export class RequestOptionalPreviousDto extends IntersectionType(
 @Controller()
 @ApiBearerAuth("JWT-auth")
 @UseGuards(AuthGuard)
-@UseInterceptors(senderIsHoster)
+@UseInterceptors(senderIsHoster, hasAdminRights)
 @ApiUnauthorizedResponse({ status: 401, description: "Unauthorized" })
 export class AppController {
   constructor() //initialize your services here

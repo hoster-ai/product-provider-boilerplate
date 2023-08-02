@@ -2,6 +2,7 @@ import { ApiProperty, ApiResponseProperty } from "@nestjs/swagger";
 import { ProviderInfoDto } from "./provider-info.dto";
 import { IsMongoId } from "class-validator";
 import { FieldDto } from "./field.dto";
+import { LabelTypeEnum } from "src/enums/label.type.enum";
 
 
 
@@ -67,5 +68,43 @@ export class ValidateResponseDto {
     example: true,
   })
   result: boolean;
+
+  @ApiResponseProperty({
+    type: [FieldDto],
+    example: [
+      {
+        id: "dist",
+        label: "Distribution name",
+        value: [],
+        default: null,
+        type: LabelTypeEnum.SELECT,
+        required: true,
+        disabled: false,
+        hidden: false,
+        regexValidation: "",
+        remoteValidation: false,
+      },
+    ],
+  })
   fields?: FieldDto[];
+}
+export class DynamicAddonResponse {
+  @ApiResponseProperty({
+    type: [FieldDto],
+    example: [
+      {
+        id: "dist",
+        label: "Distribution name",
+        value: [],
+        default: null,
+        type: LabelTypeEnum.SELECT,
+        required: true,
+        disabled: false,
+        hidden: false,
+        regexValidation: "",
+        remoteValidation: false,
+      },
+    ],
+  })
+  fields?: FieldDto[]
 }
