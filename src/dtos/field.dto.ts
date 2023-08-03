@@ -39,4 +39,5 @@ export class FieldDto {
   
   remoteValidation: boolean;
 
+  dynamicAddon?: boolean = false;
 }

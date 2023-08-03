@@ -17,13 +17,14 @@ import {
 
 import { IntersectionType, OmitType, PartialType } from "@nestjs/swagger";
 
-import { ValidateRequestDto, RequestDto } from "./dtos/request.dto";
+import { ValidateRequestDto, RequestDto, DynamicAddonRequest } from "./dtos/request.dto";
 import {
   MetaResponseDto,
   ValidateResponseDto,
   InfoResponseDto,
   TaskResponseDto,
   ErrorResponseDto,
+  DynamicAddonResponse,
 } from "./dtos/responses.dto";
 
 import { AuthGuard } from "./auth/auth.guard";
@@ -290,6 +291,17 @@ export class AppController {
     return {
       result: true,
     };
+  }
+
+
+  @Post("dynamic-addon")
+  @HttpCode(200)
+  async returnAddons(
+    @Request() request: Request & JwtPayloadRequest,
+    @Body() requestBody: DynamicAddonRequest
+  ): Promise<DynamicAddonResponse | ErrorResponseDto> {
+   
+    return {};
   }
 
   @Post("install")
