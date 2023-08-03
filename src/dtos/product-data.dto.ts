@@ -29,10 +29,13 @@ export class ProductDataDto {
   id: string;
 
   @IsDefined()
-  item_attributes: Record<string, any>;
+  product_attributes: Record<string, any>;
 
   @IsDefined()
-  addons: Record<string, any>;
+  item_addons: Record<string, any>;
+
+  @IsDefined()
+  item_meta: Record<string, any>;
 
 
   @IsDefined()

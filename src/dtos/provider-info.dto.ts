@@ -52,5 +52,5 @@ export class ProviderInfoDto {
   onBoardingUrl?: String;
 
   @IsDefined()
-  returnMetaKeys?: Record<string, string>;
+  itemMetaKeys?: Record<string, string>;
 }

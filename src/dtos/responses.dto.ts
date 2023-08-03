@@ -10,7 +10,7 @@ export class MetaResponseDto {
   @IsMongoId()
   id: string;
 
-  meta?: Record<string, any>;
+  item_meta?: Record<string, any>;
 }
 
 export class TaskResponseDto {
