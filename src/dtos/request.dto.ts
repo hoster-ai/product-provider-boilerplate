@@ -65,7 +65,7 @@ export class DynamicAddonRequest {
     description: "id of Addon Feature that requires Dynamic load.",
     example: "station_name",
   })
-  addonToBeReturned: string;
+  addonOrAttributeToBeReturned: string;
 
   @ApiProperty({
     type: Object,
