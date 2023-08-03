@@ -22,3 +22,11 @@ export class ValidateRequestDto {
 
   fields: Record<string, any>;
 }
+
+export class DynamicAddonRequest{
+
+  addonOrAttributeToBeReturned: string;
+
+ 
+  product_attributes: Record<string, any>;
+}

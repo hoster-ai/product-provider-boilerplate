@@ -26,3 +26,8 @@ export class ValidateResponseDto {
 
   fields?: FieldDto[];
 }
+
+export class DynamicAddonResponse {
+
+  field: FieldDto
+}
