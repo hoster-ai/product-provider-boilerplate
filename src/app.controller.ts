@@ -111,7 +111,7 @@ export class AppController {
 
     return {
       id: "hoster_order_product_id",
-      meta: {
+      item_meta: {
         //your meta data
       },
     };
@@ -141,7 +141,7 @@ export class AppController {
 
     return {
       id: "hoster_order_product_id",
-      meta: {
+      item_meta: {
         //your meta data
       },
     };
@@ -171,7 +171,7 @@ export class AppController {
 
     return {
       id: "hoster_order_product_id",
-      meta: {
+      item_meta: {
         //your meta data
       },
     };
@@ -201,7 +201,7 @@ export class AppController {
 
     return {
       id: "hoster_order_product_id",
-      meta: {
+      item_meta: {
         // your meta data
       },
     };
@@ -231,7 +231,7 @@ export class AppController {
 
     return {
       id: "hoster_order_product_id",
-      meta: {
+      item_meta: {
         //your meta data
       },
     };
@@ -261,7 +261,7 @@ export class AppController {
 
     return {
       id: "hoster_order_product_id",
-      meta: {
+      item_meta: {
         //your meta data
       },
     };
