@@ -284,6 +284,7 @@ export class AppController {
   })
   @HttpCode(200)
   async upgradable(
+    @Request() request: Request & JwtPayloadRequest,
     @Body() requestBody: RequestDto
   ): Promise<ValidateResponseDto | ErrorResponseDto> {
     //Perform all necessary actions here
