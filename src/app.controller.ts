@@ -268,6 +268,7 @@ export class AppController {
   @Post("validate/addons")
   @HttpCode(200)
   async validateAddons(
+    @Request() request: Request & JwtPayloadRequest,
     @Body() requestBody: ValidateRequestDto
   ): Promise<ValidateResponseDto | ErrorResponseDto> {
     //Perform all necessary actions here
