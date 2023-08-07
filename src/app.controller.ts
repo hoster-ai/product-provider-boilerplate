@@ -32,6 +32,7 @@ import {
 import {
   ValidateRequestDto,
   RequestDto,
+  DynamicAddonRequest,
 } from "./dtos/request.dto";
 import {
   MetaResponseDto,
@@ -40,11 +41,13 @@ import {
   TaskResponseDto,
   ErrorResponseDto,
   BooleanResponseDto,
+  DynamicAddonResponse,
 } from "./dtos/responses.dto";
 
 import { AuthGuard } from "./auth/auth.guard";
 import { JwtPayloadRequest } from "./dtos/jwt-payload.request";
 import { hasAdminRights, senderIsHoster } from "./auth/auth.interceptors";
+import { LabelTypeEnum } from "./enums/label.type.enum";
 export class RequestCreateDto extends OmitType(RequestDto, [
   "previousProductData",
 ] as const) {}
@@ -59,8 +62,7 @@ export class RequestOptionalPreviousDto extends IntersectionType(
 @UseInterceptors(senderIsHoster, hasAdminRights)
 @ApiUnauthorizedResponse({ status: 401, description: "Unauthorized" })
 export class AppController {
-  constructor() //initialize your services here
-  {}
+  constructor() {} //initialize your services here
 
   /**
    * @returns ProviderInfoResponseDto
@@ -124,7 +126,9 @@ export class AppController {
    * @returns Promise with MetaResponseDto|TaskResponseDto|ErrorResponseDto
    */
   @ApiOkResponse({
-    schema: { oneOf: refs(BooleanResponseDto, TaskResponseDto, ErrorResponseDto) },
+    schema: {
+      oneOf: refs(BooleanResponseDto, TaskResponseDto, ErrorResponseDto),
+    },
   })
   @ApiTags("Product")
   @ApiOperation({
@@ -142,7 +146,7 @@ export class AppController {
 
     return {
       id: "hoster_order_product_id",
-      success: true
+      success: true,
     };
   }
 
@@ -218,7 +222,9 @@ export class AppController {
     summary: "Suspend the rights to a product.",
   })
   @ApiOkResponse({
-    schema: { oneOf: refs(BooleanResponseDto, TaskResponseDto, ErrorResponseDto) },
+    schema: {
+      oneOf: refs(BooleanResponseDto, TaskResponseDto, ErrorResponseDto),
+    },
   })
   @HttpCode(200)
   @Post("suspend")
@@ -230,7 +236,7 @@ export class AppController {
 
     return {
       id: "hoster_order_product_id",
-      success: true
+      success: true,
     };
   }
 
@@ -246,7 +252,9 @@ export class AppController {
     summary: "Restore access to a product.",
   })
   @ApiOkResponse({
-    schema: { oneOf: refs(BooleanResponseDto, TaskResponseDto, ErrorResponseDto) },
+    schema: {
+      oneOf: refs(BooleanResponseDto, TaskResponseDto, ErrorResponseDto),
+    },
   })
   @HttpCode(200)
   @Post("unsuspend")
@@ -258,7 +266,7 @@ export class AppController {
 
     return {
       id: "hoster_order_product_id",
-      success: true
+      success: true,
     };
   }
 
@@ -286,8 +294,8 @@ export class AppController {
 
     return {
       id: "hoster_order_product_id",
-      success: true
-    }
+      success: true,
+    };
   }
 
   /**
@@ -313,8 +321,8 @@ export class AppController {
 
     return {
       id: "hoster_order_product_id",
-      success: true
-    }
+      success: true,
+    };
   }
 
   /**
@@ -330,7 +338,9 @@ export class AppController {
   })
   @Post("delete")
   @ApiOkResponse({
-    schema: { oneOf: refs(BooleanResponseDto, TaskResponseDto, ErrorResponseDto) },
+    schema: {
+      oneOf: refs(BooleanResponseDto, TaskResponseDto, ErrorResponseDto),
+    },
   })
   @HttpCode(200)
   async delete(
@@ -341,8 +351,8 @@ export class AppController {
 
     return {
       id: "hoster_order_product_id",
-      success: true
-    }
+      success: true,
+    };
   }
 
   /**
@@ -411,11 +421,23 @@ export class AppController {
     @Request() request: Request & JwtPayloadRequest,
     @Body() requestBody: DynamicAddonRequest
   ): Promise<DynamicAddonResponse | ErrorResponseDto> {
-    
     //Perform all necessary actions here
 
     return {
-      result: true,
+      fields: [
+        {
+          id: "dist",
+          label: "Distribution name",
+          value: [],
+          default: null,
+          type: LabelTypeEnum.SELECT,
+          required: true,
+          disabled: false,
+          hidden: false,
+          regexValidation: "",
+          remoteValidation: false,
+        },
+      ],
     };
   }
 
