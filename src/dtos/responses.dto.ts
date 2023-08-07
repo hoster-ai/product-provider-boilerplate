@@ -62,6 +62,22 @@ export class ErrorResponseDto  {
   errors?: string[] | string;
 }
 
+export class BooleanResponseDto{
+  @ApiProperty({
+    type: String,
+    example: "5ce45d7606444f199acfba1e",
+    title: 'Id of the product/service owned by the user',
+    description: 'Id of the product/service owned by the user'
+  })
+  id: string;
+
+  @ApiResponseProperty({
+    type: Boolean,
+    example: true,
+  })
+  success: boolean = true;
+}
+
 export class ValidateResponseDto {
   @ApiResponseProperty({
     type: Boolean,

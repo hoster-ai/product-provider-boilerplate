@@ -39,6 +39,7 @@ import {
   InfoResponseDto,
   TaskResponseDto,
   ErrorResponseDto,
+  BooleanResponseDto,
 } from "./dtos/responses.dto";
 
 import { AuthGuard } from "./auth/auth.guard";
@@ -123,7 +124,7 @@ export class AppController {
    * @returns Promise with MetaResponseDto|TaskResponseDto|ErrorResponseDto
    */
   @ApiOkResponse({
-    schema: { oneOf: refs(MetaResponseDto, TaskResponseDto, ErrorResponseDto) },
+    schema: { oneOf: refs(BooleanResponseDto, TaskResponseDto, ErrorResponseDto) },
   })
   @ApiTags("Product")
   @ApiOperation({
@@ -136,14 +137,12 @@ export class AppController {
   async renew(
     @Request() request: Request & JwtPayloadRequest,
     @Body() requestBody: RequestDto
-  ): Promise<MetaResponseDto | TaskResponseDto | ErrorResponseDto> {
+  ): Promise<BooleanResponseDto | TaskResponseDto | ErrorResponseDto> {
     //Perform all necessary actions here
 
     return {
       id: "hoster_order_product_id",
-      item_meta: {
-        //your meta data
-      },
+      success: true
     };
   }
 
@@ -210,7 +209,7 @@ export class AppController {
   /**
    *
    * @param requestBody
-   * @returns Promise with MetaResponseDto|TaskResponseDto|ErrorResponseDto
+   * @returns Promise with BooleanResponseDto|TaskResponseDto|ErrorResponseDto
    */
   @ApiTags("Product")
   @ApiOperation({
@@ -219,28 +218,26 @@ export class AppController {
     summary: "Suspend the rights to a product.",
   })
   @ApiOkResponse({
-    schema: { oneOf: refs(MetaResponseDto, TaskResponseDto, ErrorResponseDto) },
+    schema: { oneOf: refs(BooleanResponseDto, TaskResponseDto, ErrorResponseDto) },
   })
   @HttpCode(200)
   @Post("suspend")
   async suspend(
     @Request() request: Request & JwtPayloadRequest,
     @Body() requestBody: RequestOptionalPreviousDto
-  ): Promise<MetaResponseDto | TaskResponseDto | ErrorResponseDto> {
+  ): Promise<BooleanResponseDto | TaskResponseDto | ErrorResponseDto> {
     //Perform all necessary actions here
 
     return {
       id: "hoster_order_product_id",
-      item_meta: {
-        //your meta data
-      },
+      success: true
     };
   }
 
   /**
    *
    * @param requestBody
-   * @returns Promise with MetaResponseDto|TaskResponseDto|ErrorResponseDto
+   * @returns Promise with BooleanResponseDto|TaskResponseDto|ErrorResponseDto
    */
   @ApiTags("Product")
   @ApiOperation({
@@ -249,21 +246,19 @@ export class AppController {
     summary: "Restore access to a product.",
   })
   @ApiOkResponse({
-    schema: { oneOf: refs(MetaResponseDto, TaskResponseDto, ErrorResponseDto) },
+    schema: { oneOf: refs(BooleanResponseDto, TaskResponseDto, ErrorResponseDto) },
   })
   @HttpCode(200)
   @Post("unsuspend")
   async unsuspend(
     @Request() request: Request & JwtPayloadRequest,
     @Body() requestBody: RequestOptionalPreviousDto
-  ): Promise<MetaResponseDto | TaskResponseDto | ErrorResponseDto> {
+  ): Promise<BooleanResponseDto | TaskResponseDto | ErrorResponseDto> {
     //Perform all necessary actions here
 
     return {
       id: "hoster_order_product_id",
-      item_meta: {
-        //your meta data
-      },
+      success: true
     };
   }
 
@@ -280,24 +275,19 @@ export class AppController {
   })
   @Post("upgradable")
   @ApiOkResponse({
-    schema: { oneOf: refs(ValidateResponseDto, ErrorResponseDto) },
+    schema: { oneOf: refs(BooleanResponseDto, ErrorResponseDto) },
   })
   @HttpCode(200)
   async upgradable(
     @Request() request: Request & JwtPayloadRequest,
     @Body() requestBody: RequestDto
-  ): Promise<ValidateResponseDto | ErrorResponseDto> {
+  ): Promise<BooleanResponseDto | ErrorResponseDto> {
     //Perform all necessary actions here
 
-    return await Promise.all([])
-      .then(() => {
-        return {
-          result: true,
-        };
-      })
-      .catch((err) => {
-        throw new HttpException(err, HttpStatus.BAD_REQUEST);
-      });
+    return {
+      id: "hoster_order_product_id",
+      success: true
+    }
   }
 
   /**
@@ -313,23 +303,18 @@ export class AppController {
   })
   @Post("downgradable")
   @ApiOkResponse({
-    schema: { oneOf: refs(ValidateResponseDto, ErrorResponseDto) },
+    schema: { oneOf: refs(BooleanResponseDto, ErrorResponseDto) },
   })
   @HttpCode(200)
   async downgradable(
     @Body() requestBody: RequestDto
-  ): Promise<ValidateResponseDto | ErrorResponseDto> {
+  ): Promise<BooleanResponseDto | ErrorResponseDto> {
     //Perform all necessary actions here
 
-    return await Promise.all([])
-      .then(() => {
-        return {
-          result: true,
-        };
-      })
-      .catch((err) => {
-        throw new HttpException(err, HttpStatus.BAD_REQUEST);
-      });
+    return {
+      id: "hoster_order_product_id",
+      success: true
+    }
   }
 
   /**
@@ -345,24 +330,19 @@ export class AppController {
   })
   @Post("delete")
   @ApiOkResponse({
-    schema: { oneOf: refs(MetaResponseDto, TaskResponseDto, ErrorResponseDto) },
+    schema: { oneOf: refs(BooleanResponseDto, TaskResponseDto, ErrorResponseDto) },
   })
   @HttpCode(200)
   async delete(
     @Request() request: Request & JwtPayloadRequest,
     @Body() requestBody: RequestDto
-  ): Promise<ValidateResponseDto | ErrorResponseDto> {
+  ): Promise<BooleanResponseDto | ErrorResponseDto> {
     //Perform all necessary actions here
 
-    return await Promise.all([])
-      .then(() => {
-        return {
-          result: true,
-        };
-      })
-      .catch((err) => {
-        throw new HttpException(err, HttpStatus.BAD_REQUEST);
-      });
+    return {
+      id: "hoster_order_product_id",
+      success: true
+    }
   }
 
   /**
