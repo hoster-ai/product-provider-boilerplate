@@ -21,6 +21,13 @@ export class ErrorResponseDto {
   errors?: string[] | string;
 }
 
+export class BooleanResponseDto {
+  @IsMongoId()
+  id: string;
+
+  success?: boolean = true;
+}
+
 export class ValidateResponseDto {
   result: boolean;
 

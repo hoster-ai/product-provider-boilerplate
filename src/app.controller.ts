@@ -25,6 +25,7 @@ import {
   TaskResponseDto,
   ErrorResponseDto,
   DynamicAddonResponse,
+  BooleanResponseDto,
 } from "./dtos/responses.dto";
 
 import { AuthGuard } from "./auth/auth.guard";
@@ -87,21 +88,19 @@ export class AppController {
   /**
    *
    * @param requestBody
-   * @returns Promise with MetaResponseDto|TaskResponseDto|ErrorResponseDto
+   * @returns Promise with BooleanResponseDto|TaskResponseDto|ErrorResponseDto
    */
   @Patch("renew")
   @HttpCode(200)
   async renew(
     @Request() request: Request & JwtPayloadRequest,
     @Body() requestBody: RequestDto
-  ): Promise<MetaResponseDto | TaskResponseDto | ErrorResponseDto> {
+  ): Promise<BooleanResponseDto | TaskResponseDto | ErrorResponseDto> {
     //Perform all necessary actions here
 
     return {
       id: "hoster_order_product_id",
-      item_meta: {
-        //your meta data
-      },
+      success: true,
     };
   }
 
@@ -151,42 +150,38 @@ export class AppController {
   /**
    *
    * @param requestBody
-   * @returns Promise with MetaResponseDto|TaskResponseDto|ErrorResponseDto
+   * @returns Promise with BooleanResponseDto|TaskResponseDto|ErrorResponseDto
    */
   @HttpCode(200)
   @Post("suspend")
   async suspend(
     @Request() request: Request & JwtPayloadRequest,
     @Body() requestBody: RequestOptionalPreviousDto
-  ): Promise<MetaResponseDto | TaskResponseDto | ErrorResponseDto> {
+  ): Promise<BooleanResponseDto | TaskResponseDto | ErrorResponseDto> {
     //Perform all necessary actions here
 
     return {
       id: "hoster_order_product_id",
-      item_meta: {
-        //your meta data
-      },
+      success: true
     };
   }
 
   /**
    *
    * @param requestBody
-   * @returns Promise with MetaResponseDto|TaskResponseDto|ErrorResponseDto
+   * @returns Promise with BooleanResponseDto|TaskResponseDto|ErrorResponseDto
    */
   @HttpCode(200)
   @Post("unsuspend")
   async unsuspend(
     @Request() request: Request & JwtPayloadRequest,
     @Body() requestBody: RequestOptionalPreviousDto
-  ): Promise<MetaResponseDto | TaskResponseDto | ErrorResponseDto> {
+  ): Promise<BooleanResponseDto | TaskResponseDto | ErrorResponseDto> {
     //Perform all necessary actions here
 
     return {
       id: "hoster_order_product_id",
-      item_meta: {
-        //your meta data
-      },
+      success: true
     };
   }
 
@@ -199,18 +194,13 @@ export class AppController {
   @HttpCode(200)
   async upgradable(
     @Body() requestBody: RequestDto
-  ): Promise<ValidateResponseDto | ErrorResponseDto> {
+  ): Promise<BooleanResponseDto | ErrorResponseDto> {
     //Perform all necessary actions here
 
-    return await Promise.all([])
-      .then(() => {
-        return {
-          result: true,
-        };
-      })
-      .catch((err) => {
-        throw new HttpException(err, HttpStatus.BAD_REQUEST);
-      });
+    return {
+      id: "hoster_order_product_id",
+      success: true
+    };
   }
 
   /**
@@ -222,18 +212,13 @@ export class AppController {
   @HttpCode(200)
   async downgradable(
     @Body() requestBody: RequestDto
-  ): Promise<ValidateResponseDto | ErrorResponseDto> {
+  ): Promise<BooleanResponseDto | ErrorResponseDto> {
     //Perform all necessary actions here
 
-    return await Promise.all([])
-      .then(() => {
-        return {
-          result: true,
-        };
-      })
-      .catch((err) => {
-        throw new HttpException(err, HttpStatus.BAD_REQUEST);
-      });
+    return {
+      id: "hoster_order_product_id",
+      success: true
+    };
   }
 
   /**
@@ -246,18 +231,13 @@ export class AppController {
   async delete(
     @Request() request: Request & JwtPayloadRequest,
     @Body() requestBody: RequestDto
-  ): Promise<ValidateResponseDto | ErrorResponseDto> {
+  ): Promise<BooleanResponseDto | ErrorResponseDto> {
     //Perform all necessary actions here
 
-    return await Promise.all([])
-      .then(() => {
-        return {
-          result: true,
-        };
-      })
-      .catch((err) => {
-        throw new HttpException(err, HttpStatus.BAD_REQUEST);
-      });
+    return {
+      id: "hoster_order_product_id",
+      success: true
+    };
   }
 
   /**
