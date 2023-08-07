@@ -396,12 +396,22 @@ export class AppController {
     };
   }
 
-  @Post("install")
-  @ApiTags("Provider")
-  @ApiOperation({ summary: "Install the provider to the Hoster." })
-  @ApiNoContentResponse({ description: "No Content" })
+  @ApiTags("Product")
+  @ApiOperation({
+    summary: "Return the addons of a specific product",
+    description:
+      "Receive the id of the addon to be returned and the Product Attributes, and send back the addons of the Product.",
+  })
+  @ApiOkResponse({
+    schema: { oneOf: refs(DynamicAddonResponse, ErrorResponseDto) },
+  })
+  @Post("dynamic-addon")
   @HttpCode(200)
-  async install(): Promise<ValidateResponseDto | ErrorResponseDto> {
+  async returnAddons(
+    @Request() request: Request & JwtPayloadRequest,
+    @Body() requestBody: DynamicAddonRequest
+  ): Promise<DynamicAddonResponse | ErrorResponseDto> {
+    
     //Perform all necessary actions here
 
     return {
