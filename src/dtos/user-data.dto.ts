@@ -1,5 +1,4 @@
 import {
-  IsBoolean,
   IsDefined,
   IsEmail,
   IsEnum,
