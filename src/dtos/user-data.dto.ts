@@ -63,27 +63,6 @@ export class UserDataDto {
   })
   lastName: string;
 
-  @IsBoolean()
-  @IsOptional()
-  @ApiPropertyOptional({
-    type: Boolean,
-    title: "Is company",
-    example: false,
-    default: false,
-    description: "Indicates whether the user is a company or not"
-  })
-  isCompany?: boolean;
-
-  @IsString()
-  @MinLength(1)
-  @MaxLength(250)
-  @ApiProperty({
-    type: String,
-    title: "Company Name",
-    description: "The name of the Company. Is null or empty string if is not company"
-  })
-  companyName: string;
-
   @IsDefined()
   @IsNotEmpty()
   @IsString()
@@ -186,14 +165,4 @@ export class UserDataDto {
     description: "User's State"
   })
   state?: string;
-
-  @IsOptional()
-  @MaxLength(3)
-  @ApiPropertyOptional({
-    type: String,
-    title: "Currency",
-    example: "Euro",
-    description: "User's selected currency"
-  })
-  currency?: string;
 }
