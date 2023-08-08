@@ -1,9 +1,8 @@
 /* eslint-disable prettier/prettier */
-import { ApiExtraModels, ApiProperty, ApiResponseProperty, getSchemaPath } from "@nestjs/swagger";
+import { ApiExtraModels, ApiProperty, ApiResponseProperty } from "@nestjs/swagger";
 import { FieldDto } from "./field.dto";
 import { LabelTypeEnum } from "../enums/label.type.enum";
 import { IsDefined } from "class-validator";
-import { TimeZones } from "src/enums/timezones.enum";
 
 export class DynamicPriceInfoDto {
   @ApiResponseProperty({ type: String, example: "cpu" })

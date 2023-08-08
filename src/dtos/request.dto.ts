@@ -1,5 +1,5 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { IsDefined, IsObject, IsOptional } from "class-validator";
+import { IsDefined, IsObject } from "class-validator";
 import { ProductDataDto as ProductDataDto } from "./product-data.dto";
 import { UserDataDto as UserDataDto } from "./user-data.dto";
 

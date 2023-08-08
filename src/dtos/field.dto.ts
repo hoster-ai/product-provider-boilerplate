@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import { ApiExtraModels, ApiProperty } from "@nestjs/swagger";
+import { ApiProperty } from "@nestjs/swagger";
 import { LabelTypeEnum } from "../enums/label.type.enum";
 
 

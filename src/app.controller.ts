@@ -9,8 +9,6 @@ import {
   UseGuards,
   HttpCode,
   Request,
-  HttpStatus,
-  HttpException,
   Patch,
   UseInterceptors,
 } from "@nestjs/common";

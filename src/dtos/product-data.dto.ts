@@ -7,7 +7,6 @@ import {
   IsIP,
   IsNumber,
 } from "class-validator";
-import { TimeZones } from "src/enums/timezones.enum";
 import { DurationEnum } from "../enums/duration.enum";
 import { IpTypeEnum } from "../enums/ip-type.enum";
 
