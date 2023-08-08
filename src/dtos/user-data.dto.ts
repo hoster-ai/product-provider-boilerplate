@@ -34,15 +34,6 @@ export class UserDataDto {
   @IsString()
   lastName: string;
 
-  @IsBoolean()
-  @IsOptional()
-  isCompany?: boolean;
-
-  @IsString()
-  @MinLength(1)
-  @MaxLength(250)
-  companyName: string;
-
   @IsDefined()
   @IsNotEmpty()
   @IsString()
@@ -93,8 +84,4 @@ export class UserDataDto {
   @MinLength(0)
   @MaxLength(250)
   state?: string;
-
-  @IsOptional()
-  @MaxLength(3)
-  currency?: string;
 }
