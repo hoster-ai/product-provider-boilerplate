@@ -1,4 +1,4 @@
-import { ApiProperty } from "@nestjs/swagger";
+import { ApiProperty, IntersectionType, OmitType, PartialType } from "@nestjs/swagger";
 import { IsDefined, IsObject } from "class-validator";
 import { ProductDataDto as ProductDataDto } from "./product-data.dto";
 import { UserDataDto as UserDataDto } from "./user-data.dto";
@@ -23,8 +23,7 @@ export class RequestDto {
   })
   productData: ProductDataDto;
 
-  // @IsOptional()
-  @IsDefined()
+  @IsOptional()
   @IsObject()
   @ApiProperty({
     type: ProductDataDto,
@@ -34,6 +33,8 @@ export class RequestDto {
   })
   previousProductData?: ProductDataDto;
 }
+
+
 
 export class ValidateRequestDto {
   @ApiProperty({
@@ -80,4 +81,10 @@ export class DynamicAddonRequest {
       "Product_attributes are all the attributes of a specific product. These are the attributes of the product as chosen by the seller when creating it. The key is the name of the attribute as a key and the value is of <b>any</b> type",
   })
   product_attributes: Record<string, any>;
+}
+function IsOptional(): (
+  target: RequestDto,
+  propertyKey: "previousProductData"
+) => void {
+  throw new Error("Function not implemented.");
 }

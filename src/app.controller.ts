@@ -49,10 +49,7 @@ import { LabelTypeEnum } from "./enums/label.type.enum";
 export class RequestCreateDto extends OmitType(RequestDto, [
   "previousProductData",
 ] as const) {}
-export class RequestOptionalPreviousDto extends IntersectionType(
-  OmitType(RequestDto, ["previousProductData"] as const),
-  PartialType(OmitType(RequestDto, ["productData", "userData"] as const))
-) {}
+
 
 @Controller()
 @ApiBearerAuth("JWT-auth")
@@ -228,7 +225,7 @@ export class AppController {
   @Post("suspend")
   async suspend(
     @Request() request: Request & JwtPayloadRequest,
-    @Body() requestBody: RequestOptionalPreviousDto
+    @Body() requestBody: RequestDto
   ): Promise<BooleanResponseDto | TaskResponseDto | ErrorResponseDto> {
     //Perform all necessary actions here
 
@@ -258,7 +255,7 @@ export class AppController {
   @Post("unsuspend")
   async unsuspend(
     @Request() request: Request & JwtPayloadRequest,
-    @Body() requestBody: RequestOptionalPreviousDto
+    @Body() requestBody: RequestDto
   ): Promise<BooleanResponseDto | TaskResponseDto | ErrorResponseDto> {
     //Perform all necessary actions here
 
