@@ -30,13 +30,7 @@ import { AuthGuard } from "./auth/auth.guard";
 import { JwtPayloadRequest } from "./dtos/jwt-payload.request";
 import { senderIsHoster } from "./auth/auth.interceptors";
 
-export class RequestCreateDto extends OmitType(RequestDto, [
-  "previousProductData",
-] as const) {}
-export class RequestOptionalPreviousDto extends IntersectionType(
-  OmitType(RequestDto, ["previousProductData"] as const),
-  PartialType(OmitType(RequestDto, ["productData", "userData"] as const))
-) {}
+
 
 @Controller()
 @UseGuards(AuthGuard)
@@ -71,7 +65,7 @@ export class AppController {
   @Post("create")
   public async create(
     @Request() request: Request & JwtPayloadRequest,
-    @Body() requestBody: RequestCreateDto
+    @Body() requestBody: RequestDto
   ): Promise<MetaResponseDto | TaskResponseDto | ErrorResponseDto> {
     //Perform all necessary actions here
 
@@ -154,7 +148,7 @@ export class AppController {
   @Post("suspend")
   async suspend(
     @Request() request: Request & JwtPayloadRequest,
-    @Body() requestBody: RequestOptionalPreviousDto
+    @Body() requestBody: RequestDto
   ): Promise<BooleanResponseDto | TaskResponseDto | ErrorResponseDto> {
     //Perform all necessary actions here
 
@@ -173,7 +167,7 @@ export class AppController {
   @Post("unsuspend")
   async unsuspend(
     @Request() request: Request & JwtPayloadRequest,
-    @Body() requestBody: RequestOptionalPreviousDto
+    @Body() requestBody: RequestDto
   ): Promise<BooleanResponseDto | TaskResponseDto | ErrorResponseDto> {
     //Perform all necessary actions here
 
