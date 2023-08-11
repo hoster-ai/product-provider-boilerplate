@@ -86,6 +86,12 @@ export class ValidateResponseDto {
   result: boolean;
 
   @ApiResponseProperty({
+    type: String,
+    example: 'Some Message'
+  })
+  message?: string;
+
+  @ApiResponseProperty({
     type: [FieldDto],
     example: [
       {
