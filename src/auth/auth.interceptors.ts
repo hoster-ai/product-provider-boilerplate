@@ -3,10 +3,12 @@ import {
   NestInterceptor,
   ExecutionContext,
   CallHandler,
-  ForbiddenException,
 } from "@nestjs/common";
+import { HttpStatusCode } from "axios";
 import { Observable } from "rxjs";
-import { JwtPayloadRequest } from "src/dtos/jwt-payload.request";
+import { ApiException } from "../api.exception";
+import { JwtPayloadRequest } from "../dtos/jwt-payload.request";
+import { ErrorMessage } from "../enums/error-messages.enum";
 
 @Injectable()
 export class senderIsHoster implements NestInterceptor {
@@ -17,8 +19,10 @@ export class senderIsHoster implements NestInterceptor {
       .getRequest();
 
     if (request.user.sender !== "hoster") {
-      throw new ForbiddenException(
-        "You do not have the neccessary access for this action",
+      throw new ApiException(
+        ErrorMessage.JWT_ERROR_MESSAGE,
+        null,
+        HttpStatusCode.Forbidden
       );
     }
 
@@ -35,7 +39,11 @@ export class hasAdminRights implements NestInterceptor {
       .getRequest();
 
     if (!request.user.admin_rights) {
-      throw new ForbiddenException("Forbidden");
+      throw new ApiException(
+        ErrorMessage.JWT_ERROR_MESSAGE,
+        null,
+        HttpStatusCode.Forbidden
+      );
     }
 
     return next.handle();
