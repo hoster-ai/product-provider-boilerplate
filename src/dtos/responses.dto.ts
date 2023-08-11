@@ -30,6 +30,8 @@ export class BooleanResponseDto {
 
 export class ValidateResponseDto {
   result: boolean;
+  
+  message?: string;
 
   fields?: FieldDto[];
 }
