@@ -11,6 +11,7 @@ import {
   Request,
   Patch,
   UseInterceptors,
+  Delete,
 } from "@nestjs/common";
 
 
@@ -217,7 +218,7 @@ export class AppController {
    * @param requestBody
    * @returns Promise with BooleanResponseDto|ErrorResponse
    */
-  @Post("delete")
+  @Delete(':id')
   @HttpCode(200)
   async delete(
     @Request() request: Request & JwtPayloadRequest,
