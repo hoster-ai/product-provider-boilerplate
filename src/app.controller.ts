@@ -11,6 +11,7 @@ import {
   Request,
   Patch,
   UseInterceptors,
+  Delete,
 } from "@nestjs/common";
 
 import {
@@ -331,12 +332,12 @@ export class AppController {
       "Receives the User(Customer) and Product data from the hoster so that the provider may deleta a product. Replies in one of three ways. \n1) Returns a succesfull message after the deletion of the product. \n2) Returns a deletion pending message containing a task ID indicating the product is in the process of being deleted. \n3) returns an Error message indicating the deletion was unsuccesful and why. ",
     summary: "Delete a product.",
   })
-  @Post("delete")
   @ApiOkResponse({
     schema: {
       oneOf: refs(BooleanResponseDto, TaskResponseDto, ErrorResponseDto),
     },
   })
+  @Delete(':id')
   @HttpCode(200)
   async delete(
     @Request() request: Request & JwtPayloadRequest,

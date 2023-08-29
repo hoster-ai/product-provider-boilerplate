@@ -84,6 +84,8 @@ export class ValidateResponseDto {
     example: true,
   })
   result: boolean;
+  
+  message?: string;
 
   @ApiResponseProperty({
     type: String,

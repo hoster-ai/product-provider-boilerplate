@@ -3,8 +3,6 @@ import {
   NestInterceptor,
   ExecutionContext,
   CallHandler,
-  ForbiddenException,
-  HttpStatus,
 } from "@nestjs/common";
 import { HttpStatusCode } from "axios";
 import { Observable } from "rxjs";
@@ -22,7 +20,9 @@ export class senderIsHoster implements NestInterceptor {
 
     if (request.user.sender !== "hoster") {
       throw new ApiException(
-        ErrorMessage.JWT_ERROR_MESSAGE,null,HttpStatusCode.Forbidden
+        ErrorMessage.JWT_ERROR_MESSAGE,
+        null,
+        HttpStatusCode.Forbidden
       );
     }
 
@@ -40,7 +40,9 @@ export class hasAdminRights implements NestInterceptor {
 
     if (!request.user.admin_rights) {
       throw new ApiException(
-        ErrorMessage.JWT_ERROR_MESSAGE,null,HttpStatusCode.Forbidden
+        ErrorMessage.JWT_ERROR_MESSAGE,
+        null,
+        HttpStatusCode.Forbidden
       );
     }
 

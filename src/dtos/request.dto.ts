@@ -37,6 +37,24 @@ export class RequestDto {
 
 
 export class ValidateRequestDto {
+  @IsDefined()
+  @IsObject()
+  @ApiProperty({
+    type: UserDataDto,
+    description: "Here the Hoster sends the User's Data",
+    title: "User(Customer) Data",
+  })
+  userData: UserDataDto;
+
+  @IsDefined()
+  @IsObject()
+  @ApiProperty({
+    type: ProductDataDto,
+    title: "Product/Service Data",
+    description:
+      "Here the Hoster sends the User's Product/service Data with any changes made.",
+  })
+  productData: ProductDataDto;
   @ApiProperty({
     type: String,
     description: "id of Addon Feature that requires remote validation.",
