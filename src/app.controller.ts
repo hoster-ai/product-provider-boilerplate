@@ -12,10 +12,15 @@ import {
   Patch,
   UseInterceptors,
   Delete,
+  Param,
 } from "@nestjs/common";
 
-
-import { ValidateRequestDto, RequestDto, DynamicAddonRequest } from "./dtos/request.dto";
+import {
+  ValidateRequestDto,
+  RequestDto,
+  DynamicAddonRequest,
+  RequestCreateDto,
+} from "./dtos/request.dto";
 import {
   MetaResponseDto,
   ValidateResponseDto,
@@ -29,8 +34,6 @@ import {
 import { AuthGuard } from "./auth/auth.guard";
 import { JwtPayloadRequest } from "./dtos/jwt-payload.request";
 import { senderIsHoster } from "./auth/auth.interceptors";
-
-
 
 @Controller()
 @UseGuards(AuthGuard)
@@ -65,7 +68,7 @@ export class AppController {
   @Post("create")
   public async create(
     @Request() request: Request & JwtPayloadRequest,
-    @Body() requestBody: RequestDto
+    @Body() requestBody: RequestCreateDto
   ): Promise<MetaResponseDto | TaskResponseDto | ErrorResponseDto> {
     //Perform all necessary actions here
 
@@ -154,7 +157,7 @@ export class AppController {
 
     return {
       id: "hoster_order_product_id",
-      success: true
+      success: true,
     };
   }
 
@@ -173,7 +176,7 @@ export class AppController {
 
     return {
       id: "hoster_order_product_id",
-      success: true
+      success: true,
     };
   }
 
@@ -185,13 +188,14 @@ export class AppController {
   @Post("upgradable")
   @HttpCode(200)
   async upgradable(
+    @Request() request: Request & JwtPayloadRequest,
     @Body() requestBody: RequestDto
   ): Promise<BooleanResponseDto | ErrorResponseDto> {
     //Perform all necessary actions here
 
     return {
       id: "hoster_order_product_id",
-      success: true
+      success: true,
     };
   }
 
@@ -203,13 +207,14 @@ export class AppController {
   @Post("downgradable")
   @HttpCode(200)
   async downgradable(
+    @Request() request: Request & JwtPayloadRequest,
     @Body() requestBody: RequestDto
   ): Promise<BooleanResponseDto | ErrorResponseDto> {
     //Perform all necessary actions here
 
     return {
       id: "hoster_order_product_id",
-      success: true
+      success: true,
     };
   }
 
@@ -218,9 +223,10 @@ export class AppController {
    * @param requestBody
    * @returns Promise with BooleanResponseDto|ErrorResponse
    */
-  @Delete(':id')
+  @Delete(":id")
   @HttpCode(200)
   async delete(
+    @Param("id") id: string,
     @Request() request: Request & JwtPayloadRequest,
     @Body() requestBody: RequestDto
   ): Promise<BooleanResponseDto | ErrorResponseDto> {
@@ -228,7 +234,7 @@ export class AppController {
 
     return {
       id: "hoster_order_product_id",
-      success: true
+      success: true,
     };
   }
 
@@ -266,15 +272,13 @@ export class AppController {
     };
   }
 
-
   @Post("dynamic-addon")
   @HttpCode(200)
   async returnAddons(
     @Request() request: Request & JwtPayloadRequest,
     @Body() requestBody: DynamicAddonRequest
   ): Promise<DynamicAddonResponse | ErrorResponseDto> {
-   
-    return {};
+    return { id: "" };
   }
 
   @Post("install")
@@ -282,7 +286,7 @@ export class AppController {
   async install(): Promise<null | ErrorResponseDto> {
     //Perform all necessary actions here
 
-    return {};
+    return;
   }
 
   @Post("uninstall")
@@ -290,6 +294,6 @@ export class AppController {
   async uninstall(): Promise<null | ErrorResponseDto> {
     //Perform all necessary actions here
 
-    return {};
+    return;
   }
 }

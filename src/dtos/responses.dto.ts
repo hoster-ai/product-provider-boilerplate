@@ -18,6 +18,7 @@ export class TaskResponseDto {
 }
 
 export class ErrorResponseDto {
+  id: string;
   errors?: string[] | string;
 }
 
@@ -30,13 +31,12 @@ export class BooleanResponseDto {
 
 export class ValidateResponseDto {
   result: boolean;
-  
+
   message?: string;
 
   fields?: FieldDto[];
 }
 
 export class DynamicAddonResponse {
-
-  field: FieldDto
+  field: FieldDto;
 }

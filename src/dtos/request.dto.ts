@@ -1,6 +1,7 @@
 import { IsDefined, IsObject, IsOptional } from "class-validator";
 import { ProductDataDto as ProductDataDto } from "./product-data.dto";
 import { UserDataDto as UserDataDto } from "./user-data.dto";
+import { OmitType, PartialType } from "@nestjs/swagger";
 
 export class RequestDto {
   @IsDefined()
@@ -16,6 +17,10 @@ export class RequestDto {
   previousProductData?: ProductDataDto;
 }
 
+export class RequestCreateDto extends OmitType(RequestDto, [
+  "previousProductData",
+]) {}
+
 export class ValidateRequestDto {
   userData: UserDataDto;
   productData: ProductDataDto;
@@ -23,10 +28,8 @@ export class ValidateRequestDto {
   fields: Record<string, any>;
 }
 
-export class DynamicAddonRequest{
-
+export class DynamicAddonRequest {
   addonOrAttributeToBeReturned: string;
 
- 
   product_attributes: Record<string, any>;
 }
