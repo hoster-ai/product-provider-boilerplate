@@ -12,6 +12,8 @@ import {
   Patch,
   UseInterceptors,
   Delete,
+  UseFilters,
+  Param,
 } from "@nestjs/common";
 
 import {
@@ -32,6 +34,7 @@ import {
   ValidateRequestDto,
   RequestDto,
   DynamicAddonRequest,
+  RequestCreateDto,
 } from "./dtos/request.dto";
 import {
   MetaResponseDto,
@@ -47,16 +50,14 @@ import { AuthGuard } from "./auth/auth.guard";
 import { JwtPayloadRequest } from "./dtos/jwt-payload.request";
 import { hasAdminRights, senderIsHoster } from "./auth/auth.interceptors";
 import { LabelTypeEnum } from "./enums/label.type.enum";
-export class RequestCreateDto extends OmitType(RequestDto, [
-  "previousProductData",
-] as const) {}
-
+import { ApiExceptionFilter } from "./api.exception.filter";
 
 @Controller()
 @ApiBearerAuth("JWT-auth")
 @UseGuards(AuthGuard)
 @UseInterceptors(senderIsHoster, hasAdminRights)
 @ApiUnauthorizedResponse({ status: 401, description: "Unauthorized" })
+@UseFilters(new ApiExceptionFilter())
 export class AppController {
   constructor() {} //initialize your services here
 
@@ -311,6 +312,7 @@ export class AppController {
   })
   @HttpCode(200)
   async downgradable(
+    @Request() request: Request & JwtPayloadRequest,
     @Body() requestBody: RequestDto
   ): Promise<BooleanResponseDto | ErrorResponseDto> {
     //Perform all necessary actions here
@@ -337,9 +339,10 @@ export class AppController {
       oneOf: refs(BooleanResponseDto, TaskResponseDto, ErrorResponseDto),
     },
   })
-  @Delete(':id')
+  @Delete(":id")
   @HttpCode(200)
   async delete(
+    @Param("id") id: string,
     @Request() request: Request & JwtPayloadRequest,
     @Body() requestBody: RequestDto
   ): Promise<BooleanResponseDto | ErrorResponseDto> {

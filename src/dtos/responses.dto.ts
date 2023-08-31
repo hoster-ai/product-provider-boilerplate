@@ -56,6 +56,11 @@ export class TaskResponseDto {
 
 export class ErrorResponseDto  {
   @ApiResponseProperty({
+    type: String,
+    example: "5ce45d7606444f199acfba1e",
+  })
+  id: string;
+  @ApiResponseProperty({
     type: [String] || String,
     example: "Not implemented",
   })
@@ -84,8 +89,6 @@ export class ValidateResponseDto {
     example: true,
   })
   result: boolean;
-  
-  message?: string;
 
   @ApiResponseProperty({
     type: String,

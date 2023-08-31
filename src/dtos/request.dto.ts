@@ -34,6 +34,9 @@ export class RequestDto {
   previousProductData?: ProductDataDto;
 }
 
+export class RequestCreateDto extends OmitType(RequestDto, [
+  "previousProductData",
+] as const) {}
 
 
 export class ValidateRequestDto {
