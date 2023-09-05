@@ -52,7 +52,7 @@ import { JwtPayloadRequest } from "./dtos/jwt-payload.request";
 import { hasAdminRights, senderIsHoster } from "./auth/auth.interceptors";
 import { LabelTypeEnum } from "./enums/label.type.enum";
 import { ApiExceptionFilter } from "./api.exception.filter";
-import { CronService } from "./cron.service";
+import { TasksService } from "./scheduler.service";
 
 @Controller()
 @ApiBearerAuth("JWT-auth")
@@ -61,7 +61,7 @@ import { CronService } from "./cron.service";
 @ApiUnauthorizedResponse({ status: 401, description: "Unauthorized" })
 @UseFilters(new ApiExceptionFilter())
 export class AppController {
-  constructor(private readonly cronService: CronService) {} //initialize your services here
+  constructor(private readonly cronService: TasksService) {} //initialize your services here
 
   /**
    * @returns ProviderInfoResponseDto
@@ -466,11 +466,6 @@ export class AppController {
     }
   ) {
     //Perform all necessary actions here
-    this.cronService.addInterval(
-      requestBody.item_id,
-      requestBody.milliseconds,
-      requestBody.payPerUseRequest
-    );
-    
+    this.cronService.addCronJob("name", "*");
   }
 }
