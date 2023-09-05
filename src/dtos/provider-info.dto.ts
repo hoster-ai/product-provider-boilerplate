@@ -7,6 +7,7 @@ import {
 import { FieldDto } from "./field.dto";
 import { LabelTypeEnum } from "../enums/label.type.enum";
 import { IsDefined } from "class-validator";
+import { UnitDto } from "./pay-per-use.dto";
 
 export class DynamicPriceInfoDto {
   @ApiResponseProperty({ type: String, example: "cpu" })
@@ -269,6 +270,7 @@ export class ProviderInfoDto {
   })
   onBoardingUrl?: String;
 
+  payPerUse?: UnitDto[];
 
   @IsDefined()
   @ApiProperty({

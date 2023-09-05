@@ -1,7 +1,13 @@
-import { ApiProperty, IntersectionType, OmitType, PartialType } from "@nestjs/swagger";
+import {
+  ApiProperty,
+  IntersectionType,
+  OmitType,
+  PartialType,
+} from "@nestjs/swagger";
 import { IsDefined, IsObject } from "class-validator";
 import { ProductDataDto as ProductDataDto } from "./product-data.dto";
 import { UserDataDto as UserDataDto } from "./user-data.dto";
+import { UnitDto } from "./pay-per-use.dto";
 
 export class RequestDto {
   @IsDefined()
@@ -23,7 +29,7 @@ export class RequestDto {
   })
   productData: ProductDataDto;
 
-  @IsOptional()
+  // @IsOptional()
   @IsObject()
   @ApiProperty({
     type: ProductDataDto,
@@ -37,7 +43,6 @@ export class RequestDto {
 export class RequestCreateDto extends OmitType(RequestDto, [
   "previousProductData",
 ] as const) {}
-
 
 export class ValidateRequestDto {
   @IsDefined()
@@ -103,9 +108,29 @@ export class DynamicAddonRequest {
   })
   product_attributes: Record<string, any>;
 }
-function IsOptional(): (
-  target: RequestDto,
-  propertyKey: "previousProductData"
-) => void {
-  throw new Error("Function not implemented.");
+
+export class PayPerUseRequest {
+  @ApiProperty({
+    type: String,
+    title: "Request for Per Use payment",
+    example: "3c43a1df-4ca6-49b5-8b19-2e406bc8231a",
+    description: "Id of the item that must be paid for",
+  })
+  item_id: string;
+  @ApiProperty({
+    type: Object,
+    additionalProperties: {
+      type: "number",
+    },
+    title: "Units to be Charged",
+    description:
+      "Units are the base and minimum quantity to be charged per some set Interval",
+  })
+  units: Record<keyof UnitDto["id"], number>[];
 }
+// function IsOptional(): (
+//   target: RequestDto,
+//   propertyKey: "previousProductData"
+// ) => void {
+//   throw new Error("Function not implemented.");
+// }
