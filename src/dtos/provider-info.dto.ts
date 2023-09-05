@@ -1,6 +1,7 @@
 /* eslint-disable prettier/prettier */
 import { FieldDto } from "./field.dto";
 import { IsDefined } from "class-validator";
+import { UnitDto } from "./unit.dto";
 
 export class DynamicPriceInfoDto {
   key: string;
@@ -50,6 +51,8 @@ export class ProviderInfoDto {
   menuItems?: MenuItemDto[];
 
   onBoardingUrl?: String;
+
+  payPerUseUnits?: UnitDto[];
 
   @IsDefined()
   itemMetaKeys?: Record<string, string>;
