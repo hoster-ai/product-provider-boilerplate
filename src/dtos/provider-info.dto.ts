@@ -270,7 +270,14 @@ export class ProviderInfoDto {
   })
   onBoardingUrl?: String;
 
-  payPerUse?: UnitDto[];
+  @ApiProperty({
+    type: [UnitDto],
+    title: "Array of Units",
+    required: false,
+    description:
+      "These are all the units as set by the integration, to be sent to the hoster for the calculation of prices",
+  })
+  payPerUseUnits?: UnitDto[];
 
   @IsDefined()
   @ApiProperty({
