@@ -23,7 +23,7 @@ export class ListActionDto {
   label?: string;
 
   @ApiProperty({ type: String, example: "", title: "Action Description", description: 'This is the description of the buttons funstion' })
-  popup?: string;
+  popup?: boolean;
 
   @ApiProperty({ type: String, example: "", title: "ActionPost", description: 'this is the url of the button.' })
   link: string;
