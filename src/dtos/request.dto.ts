@@ -7,7 +7,7 @@ import {
 import { IsDefined, IsObject } from "class-validator";
 import { ProductDataDto as ProductDataDto } from "./product-data.dto";
 import { UserDataDto as UserDataDto } from "./user-data.dto";
-import { UnitDto } from "./pay-per-use.dto";
+import { UnitDto } from "./unit.dto";
 
 export class RequestDto {
   @IsDefined()
