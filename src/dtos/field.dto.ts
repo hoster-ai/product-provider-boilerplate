@@ -115,4 +115,11 @@ export class FieldDto {
   })
   dynamicAddon?: boolean = false;
 
+  @ApiProperty({
+    type:Boolean,
+    example: false,
+    description:'This Property stay hidden when the Item is charged in a Pay per Use method'
+  })
+  hideOnPayPerUse?: boolean
+
 }

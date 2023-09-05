@@ -269,6 +269,7 @@ export class ProviderInfoDto {
   })
   onBoardingUrl?: String;
 
+
   @IsDefined()
   @ApiProperty({
     title: "MetaKeys",
