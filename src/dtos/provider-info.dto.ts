@@ -15,7 +15,7 @@ export class ListActionDto {
 
   label?: string;
 
-  popup?: string;
+  popup?: boolean;
 
   link: string;
 }
