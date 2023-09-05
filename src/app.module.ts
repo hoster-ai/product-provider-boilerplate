@@ -4,6 +4,8 @@ import { AppController } from "./app.controller";
 import { AuthModule } from "./auth/auth.module";
 import { HttpModule } from "@nestjs/axios";
 import { CronService } from "./cron.serrveice";
+import { ScheduleModule } from '@nestjs/schedule';
+
 
 @Module({
   imports: [
@@ -11,6 +13,7 @@ import { CronService } from "./cron.serrveice";
     ConfigModule.forRoot({
       isGlobal: true,
     }),
+    ScheduleModule.forRoot(),
     HttpModule,
   ],
   controllers: [AppController /**your Controllers here*/],

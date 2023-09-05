@@ -1,5 +1,5 @@
 import { Injectable, Logger, Post } from "@nestjs/common";
-import { Cron, Interval, SchedulerRegistry, Timeout } from "@nestjs/schedule";
+import { SchedulerRegistry, Timeout } from "@nestjs/schedule";
 import axios, { isAxiosError } from "axios";
 import { ApiException } from "./api.exception";
 import { PayPerUseRequest } from "./dtos/request.dto";
