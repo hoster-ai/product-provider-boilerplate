@@ -35,6 +35,7 @@ import {
   RequestDto,
   DynamicAddonRequest,
   RequestCreateDto,
+  PayPerUseRequest,
 } from "./dtos/request.dto";
 import {
   MetaResponseDto,
@@ -51,15 +52,16 @@ import { JwtPayloadRequest } from "./dtos/jwt-payload.request";
 import { hasAdminRights, senderIsHoster } from "./auth/auth.interceptors";
 import { LabelTypeEnum } from "./enums/label.type.enum";
 import { ApiExceptionFilter } from "./api.exception.filter";
+import { CronService } from "./cron.service";
 
 @Controller()
 @ApiBearerAuth("JWT-auth")
-@UseGuards(AuthGuard)
-@UseInterceptors(senderIsHoster, hasAdminRights)
+// @UseGuards(AuthGuard)
+// @UseInterceptors(senderIsHoster, hasAdminRights)
 @ApiUnauthorizedResponse({ status: 401, description: "Unauthorized" })
 @UseFilters(new ApiExceptionFilter())
 export class AppController {
-  constructor() {} //initialize your services here
+  constructor(private readonly cronService: CronService) {} //initialize your services here
 
   /**
    * @returns ProviderInfoResponseDto
@@ -451,5 +453,24 @@ export class AppController {
     return {
       result: true,
     };
+  }
+
+  @Post("add-interval")
+  async adinter(
+    @Request() request: Request & JwtPayloadRequest,
+    @Body()
+    requestBody: {
+      item_id: string;
+      milliseconds: number;
+      payPerUseRequest: PayPerUseRequest;
+    }
+  ) {
+    //Perform all necessary actions here
+    this.cronService.addInterval(
+      requestBody.item_id,
+      requestBody.milliseconds,
+      requestBody.payPerUseRequest
+    );
+    
   }
 }

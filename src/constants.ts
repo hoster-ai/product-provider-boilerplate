@@ -1,0 +1,1 @@
+export const intervalHour = 3600000

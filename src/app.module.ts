@@ -3,8 +3,8 @@ import { ConfigModule } from "@nestjs/config";
 import { AppController } from "./app.controller";
 import { AuthModule } from "./auth/auth.module";
 import { HttpModule } from "@nestjs/axios";
-
-
+import { ScheduleModule } from "@nestjs/schedule";
+import { CronService } from "./cron.service";
 
 @Module({
   imports: [
@@ -13,8 +13,9 @@ import { HttpModule } from "@nestjs/axios";
       isGlobal: true,
     }),
     HttpModule,
+    ScheduleModule.forRoot(),
   ],
-  controllers: [AppController, /**your Controllers here*/],
-  providers: [/**your Services here */],
+  controllers: [AppController /**your Controllers here*/],
+  providers: [CronService /**your Services here */],
 })
 export class AppModule {}

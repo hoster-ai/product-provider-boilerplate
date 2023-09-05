@@ -126,7 +126,7 @@ export class PayPerUseRequest {
     description:
       "Units are the base and minimum quantity to be charged per some set Interval",
   })
-  units: Record<keyof UnitDto["id"], number>[];
+  units: Record<UnitDto["id"], number>[];
 }
 // function IsOptional(): (
 //   target: RequestDto,

@@ -1,4 +1,5 @@
 import { ApiProperty } from "@nestjs/swagger";
+import { IntervalEnum } from "src/enums/interval.enum";
 
 export class UnitDto {
   @ApiProperty({
@@ -20,7 +21,7 @@ export class UnitDto {
     title: "Unit Interval",
     example: "3600",
     description:
-      "This is the Interval of time in seconds for the unit to be measured.",
+      "This is the Interval of time for the unit to be measured.",
   })
-  interval: number;
+  interval: IntervalEnum;
 }

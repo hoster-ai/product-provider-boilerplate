@@ -70,8 +70,6 @@ describe("AppController (e2e)", () => {
   });
 
 
-
-
   it("GET- Info - Expect 200 and 2 object's ", async () => {
     // creating necessary Objects and simulate Actions here
 
