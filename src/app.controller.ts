@@ -24,9 +24,6 @@ import {
   ApiOperation,
   ApiTags,
   ApiUnauthorizedResponse,
-  IntersectionType,
-  OmitType,
-  PartialType,
   refs,
 } from "@nestjs/swagger";
 
@@ -35,7 +32,6 @@ import {
   RequestDto,
   DynamicAddonRequest,
   RequestCreateDto,
-  PayPerUseRequest,
 } from "./dtos/request.dto";
 import {
   MetaResponseDto,
@@ -53,15 +49,21 @@ import { hasAdminRights, senderIsHoster } from "./auth/auth.interceptors";
 import { LabelTypeEnum } from "./enums/label.type.enum";
 import { ApiExceptionFilter } from "./api.exception.filter";
 import { TasksService } from "./scheduler.service";
+import { IntervalEnum } from "./enums/interval.enum";
 
 @Controller()
 @ApiBearerAuth("JWT-auth")
-// @UseGuards(AuthGuard)
-// @UseInterceptors(senderIsHoster, hasAdminRights)
+@UseGuards(AuthGuard)
+@UseInterceptors(senderIsHoster, hasAdminRights)
 @ApiUnauthorizedResponse({ status: 401, description: "Unauthorized" })
 @UseFilters(new ApiExceptionFilter())
 export class AppController {
-  constructor(private readonly cronService: TasksService) {} //initialize your services here
+  constructor(private readonly cronService: TasksService) {
+    this.cronService.addCronJob("default", IntervalEnum.PER_HOUR);
+    // Standard PayPerUse called at the change of every hour. Gets all stored Items created and assigns units to them.
+    //It then sends those to the hoster for price calculation
+    // you can add more cronjobs like this if you have created them on the cron.service
+  } //initialize your services here
 
   /**
    * @returns ProviderInfoResponseDto
@@ -455,17 +457,17 @@ export class AppController {
     };
   }
 
-  @Post("add-interval")
-  async adinter(
-    @Request() request: Request & JwtPayloadRequest,
-    @Body()
-    requestBody: {
-      item_id: string;
-      milliseconds: number;
-      payPerUseRequest: PayPerUseRequest;
-    }
-  ) {
-    //Perform all necessary actions here
-    this.cronService.addCronJob("name", "*");
-  }
+  // @Post("add-interval")
+  // async adinter(
+  //   @Request() request: Request & JwtPayloadRequest,
+  //   @Body()
+  //   requestBody: {
+  //     item_id: string;
+  //     milliseconds: number;
+  //     payPerUseRequest: PayPerUseRequest;
+  //   }
+  // ) {
+  //   //Perform all necessary actions here
+  //   this.cronService.addCronJob("name", IntervalEnum.PER_MINUTE);
+  // }
 }
