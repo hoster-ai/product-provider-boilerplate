@@ -8,6 +8,7 @@ import { IsDefined, IsObject } from "class-validator";
 import { ProductDataDto as ProductDataDto } from "./product-data.dto";
 import { UserDataDto as UserDataDto } from "./user-data.dto";
 import { UnitDto } from "./unit.dto";
+import { Timestamp } from "rxjs";
 
 export class RequestDto {
   @IsDefined()
@@ -127,6 +128,14 @@ export class PayPerUseRequest {
       "Units are the base and minimum quantity to be charged per some set Interval",
   })
   units: Record<UnitDto["id"], number>[];
+
+  @ApiProperty({
+    type: Date,
+    description: 'Date and time the charge was made',
+    title: 'Date',
+    example: 'September 6, 2023, 15:30:00'
+  })
+  createdAt: Date;
 }
 // function IsOptional(): (
 //   target: RequestDto,

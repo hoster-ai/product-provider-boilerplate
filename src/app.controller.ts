@@ -456,18 +456,4 @@ export class AppController {
       result: true,
     };
   }
-
-  // @Post("add-interval")
-  // async adinter(
-  //   @Request() request: Request & JwtPayloadRequest,
-  //   @Body()
-  //   requestBody: {
-  //     item_id: string;
-  //     milliseconds: number;
-  //     payPerUseRequest: PayPerUseRequest;
-  //   }
-  // ) {
-  //   //Perform all necessary actions here
-  //   this.cronService.addCronJob("name", IntervalEnum.PER_MINUTE);
-  // }
 }

@@ -10,10 +10,9 @@ import { IntervalEnum } from "./enums/interval.enum";
 @Injectable()
 export class TasksService {
   private readonly logger = new Logger(TasksService.name);
+  private chargeRequests: Array<Array<PayPerUseRequest>>; // In this Array the requests to be made are stored.
 
-  constructor(private schedulerRegistry: SchedulerRegistry) {
-    
-  }
+  constructor(private schedulerRegistry: SchedulerRegistry) {}
 
   async addCronJob(name: string, interval: IntervalEnum) {
     const job = new CronJob(interval, () => {
@@ -42,50 +41,33 @@ export class TasksService {
   async sendUnits() {
     let items: string[]; //get items from storage
     let units: Record<string, number>[]; //calculate units some way
-    // const map: Map<string, any> = this.createMapFromArrayPairs(items, units); // Map every item with each unit it coresponds to
     const url = "https://api.spotify.com/v1/me/player/next"; //this is the Pay Peruse url endpoint to be called on the hoster
     //store the units for every item somewhere(most likely mongodb)
 
     let postData: PayPerUseRequest[];
-
-    for (let i; i <= items.length; i++) {
-      postData[i].item_id = items[i];
-      postData[i].units.push(units[i]); // here you can add the logic that will give each item its coresponding unit(s)
-    }
-
-    
-    if (postData !== null || postData.length !== 0) {
-      try {
-        const result = await axios.post(url, postData);
-        if (result) {
-          // remove units from item
-        } else {
-          //keep units and send them at the next cron instance
+    if (items != undefined) {
+      if (items.length > 0) {
+        for (let i; i <= items.length; i++) {
+          postData[i].item_id = items[i];
+          postData[i].units.push(units[i]); // here you can add the logic that will give each item its coresponding unit(s)
+          postData[i].createdAt = new Date();
         }
-      } catch (err) {
-        throw new ApiException(
-          err.data.message,
-          JSON.stringify(postData),
-          err.response.status
-        );
       }
     }
-  }
-
-  //MAP UNITS WITH EACH ITEM_ID
-  createMapFromArrayPairs(keys: string[], values: any[]): Map<string, any> {
-    // Map every item with each unit it coresponds to
-    // This code below is only a demonstration
-    if (keys.length !== values.length) {
-      throw new Error("Arrays must have the same length");
+    if (postData !== undefined) {
+      this.chargeRequests.push(postData);
     }
-
-    const resultMap = new Map<string, any>();
-
-    for (let i = 0; i < keys.length; i++) {
-      resultMap.set(keys[i], values[i]);
+    if (this.chargeRequests != undefined) {
+      if (this.chargeRequests.length > 0) {
+        try {
+          for (let i; i <= this.chargeRequests.length; i++) {
+            const result = await axios.post(url, this.chargeRequests[i]); // here any requests to be made as they exist in the Charge Requests array./
+            if (result) {
+              this.chargeRequests.splice(i, 1); // When a charge Request is succsful it is removed from the array
+            }
+          }
+        } catch {}
+      }
     }
-
-    return resultMap;
   }
 }
