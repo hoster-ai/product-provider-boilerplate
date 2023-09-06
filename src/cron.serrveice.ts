@@ -1,53 +1,71 @@
-import { Injectable, Logger, Post } from "@nestjs/common";
-import { SchedulerRegistry, Timeout } from "@nestjs/schedule";
-import axios, { isAxiosError } from "axios";
-import { ApiException } from "./api.exception";
+import { Injectable, Logger } from "@nestjs/common";
+import { SchedulerRegistry } from "@nestjs/schedule";
 import { PayPerUseRequest } from "./dtos/request.dto";
+import axios from "axios";
+import { CronJob } from "cron";
+import { IntervalEnum } from "./enums/interval.enum";
 
 @Injectable()
-export class CronService {
-  private readonly logger = new Logger(CronService.name);
-
-  //   private cronJob: any; // Store the cron job instance
+export class TasksService {
+  private readonly logger = new Logger(TasksService.name);
+  private chargeRequests: Array<Array<PayPerUseRequest>>; // In this Array the requests to be made are stored.
 
   constructor(private schedulerRegistry: SchedulerRegistry) {}
 
-  async addInterval(
-    item_id: string,
-    milliseconds: number,
-    payPerUseRequest: PayPerUseRequest
-  ) {
-    const callback = async () => {
-      this.logger.warn(`Interval executing at time (${milliseconds})!`);
-      this.logger.debug("Cron job is running...");
-      /**
-       * Here you can schedule requests to be made at any point in time regularly depending on the Cron Decorator.
-       * These requests are made for the express purpose of giving the Hoster any information neccessary for  charging Pay Per Use Items
-       * In this example the Cron is called at the begining of each hour
-       */
-      const url = "https://api.spotify.com/v1/me/player/next"; //this is the Pay Peruse url endpoint to be called on the hoster
-      const postdata = payPerUseRequest;
-      let result;
-      try {
-        result = await axios.post(url, postdata);
+  async addCronJob(name: string, interval: IntervalEnum) {
+    const job = new CronJob(interval, () => {
+      this.logger.warn(`time (${interval}) for job ${name} to run!`);
+      this.sendUnits();
+    });
 
-        return { result };
-      } catch (err) {
-        this.deleteInterval(item_id);
+    this.schedulerRegistry.addCronJob(name, job);
+    job.start();
+
+    this.logger.warn(`job ${name} added for each minute at ${interval}!`);
+  }
+
+  deleteJob(jobName: string) {
+    this.schedulerRegistry.deleteCronJob(jobName);
+  }
+
+  getCronJobs() {
+    const jobs = this.schedulerRegistry.getCronJobs();
+
+    jobs.forEach((value, key, map) => {
+      console.log("Value:", value);
+    });
+  }
+
+  async sendUnits() {
+    let items: string[]; //get items from storage
+    let units: Record<string, number>[]; //calculate units some way
+    const url = "https://api.spotify.com/v1/me/player/next"; //this is the Pay Peruse url endpoint to be called on the hoster
+    //store the units for every item somewhere(most likely mongodb)
+
+    let postData: PayPerUseRequest[];
+    if (items != undefined) {
+      if (items.length > 0) {
+        for (let i; i <= items.length; i++) {
+          postData[i].item_id = items[i];
+          postData[i].units.push(units[i]); // here you can add the logic that will give each item its coresponding unit(s)
+          postData[i].createdAt = new Date();
+        }
       }
-    };
-
-    const interval = setInterval(callback, milliseconds);
-    this.schedulerRegistry.addInterval(item_id, interval);
-  }
-
-  deleteInterval(item_id: string) {
-    this.schedulerRegistry.deleteInterval(item_id);
-    this.logger.warn(`Interval ${item_id} deleted!`);
-  }
-
-  getIntervals() {
-    const intervals = this.schedulerRegistry.getIntervals();
-    intervals.forEach((key) => this.logger.log(`Interval: ${key}`));
+    }
+    if (postData !== undefined) {
+      this.chargeRequests.push(postData);
+    }
+    if (this.chargeRequests != undefined) {
+      if (this.chargeRequests.length > 0) {
+        try {
+          for (let i; i <= this.chargeRequests.length; i++) {
+            const result = await axios.post(url, this.chargeRequests[i]); // here any requests to be made as they exist in the Charge Requests array./
+            if (result) {
+              this.chargeRequests.splice(i, 1); // When a charge Request is succsful it is removed from the array
+            }
+          }
+        } catch {}
+      }
+    }
   }
 }
