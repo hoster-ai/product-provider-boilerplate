@@ -36,6 +36,7 @@ import { AuthGuard } from "./auth/auth.guard";
 import { JwtPayloadRequest } from "./dtos/jwt-payload.request";
 import { senderIsHoster } from "./auth/auth.interceptors";
 import { TasksService } from "./cron.serrveice";
+import { IntervalEnum } from "./enums/interval.enum";
 
 @Controller()
 @UseGuards(AuthGuard)
