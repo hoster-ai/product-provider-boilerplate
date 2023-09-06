@@ -1,9 +1,7 @@
 import { Injectable, Logger } from "@nestjs/common";
-import { Cron, Interval, SchedulerRegistry } from "@nestjs/schedule";
+import { SchedulerRegistry } from "@nestjs/schedule";
 import { PayPerUseRequest } from "./dtos/request.dto";
-import { intervalHour } from "./constants";
 import axios from "axios";
-import { ApiException } from "./api.exception";
 import { CronJob } from "cron";
 import { IntervalEnum } from "./enums/interval.enum";
 
