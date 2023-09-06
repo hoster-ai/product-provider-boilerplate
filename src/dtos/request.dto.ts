@@ -32,7 +32,9 @@ export class ValidateRequestDto {
 export class PayPerUseRequest {
   item_id: string;
 
-  units: Record<keyof UnitDto["id"], number>[];
+  units: Record<UnitDto["id"], number>[];
+
+  createdAt: Date;
 }
 
 export class DynamicAddonRequest {
