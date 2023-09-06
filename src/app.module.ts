@@ -3,7 +3,7 @@ import { ConfigModule } from "@nestjs/config";
 import { AppController } from "./app.controller";
 import { AuthModule } from "./auth/auth.module";
 import { HttpModule } from "@nestjs/axios";
-import { TasksService } from "./cron.service";
+import { TasksService } from "./scheduler.service";
 import { ScheduleModule } from "@nestjs/schedule";
 
 @Module({
