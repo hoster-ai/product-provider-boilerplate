@@ -35,13 +35,15 @@ import {
 import { AuthGuard } from "./auth/auth.guard";
 import { JwtPayloadRequest } from "./dtos/jwt-payload.request";
 import { senderIsHoster } from "./auth/auth.interceptors";
-import { CronService } from "./cron.serrveice";
+import { TasksService } from "./cron.serrveice";
 
 @Controller()
 @UseGuards(AuthGuard)
 @UseInterceptors(senderIsHoster)
 export class AppController {
-  constructor(private readonly cronService: CronService) {} //initialize your services here
+  constructor(private readonly cronService: TasksService) {
+    this.cronService.addCronJob("default", IntervalEnum.PER_HOUR);
+  } //initialize your services here
 
   /**
    * @returns ProviderInfoResponseDto
@@ -297,22 +299,5 @@ export class AppController {
     //Perform all necessary actions here
 
     return;
-  }
-  @Post("add-interval")
-  async adinter(
-    @Request() request: Request & JwtPayloadRequest,
-    @Body()
-    requestBody: {
-      item_id: string;
-      milliseconds: number;
-      payPerUseRequest: PayPerUseRequest;
-    }
-  ) {
-    //Perform all necessary actions here
-    this.cronService.addInterval(
-      requestBody.item_id,
-      requestBody.milliseconds,
-      requestBody.payPerUseRequest
-    );
   }
 }
