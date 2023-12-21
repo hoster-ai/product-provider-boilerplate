@@ -26,6 +26,8 @@ export class FieldDto {
 
   remoteValidation: boolean;
 
+  error: string = null;
+
   dynamicAddon?: boolean = false;
 
   hideOnPayPerUse?: boolean = false;

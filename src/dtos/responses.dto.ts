@@ -6,11 +6,11 @@ export class InfoResponseDto {
   info: ProviderInfoDto;
 }
 
-export class MetaResponseDto {
+export class SuccessResponseDto {
   @IsMongoId()
   id: string;
 
-  item_meta?: Record<string, any>;
+  item_data?: Record<string, any>;
 }
 
 export class TaskResponseDto {

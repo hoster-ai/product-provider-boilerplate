@@ -23,7 +23,7 @@ import {
   PayPerUseRequest,
 } from "./dtos/request.dto";
 import {
-  MetaResponseDto,
+  SuccessResponseDto,
   ValidateResponseDto,
   InfoResponseDto,
   TaskResponseDto,
@@ -74,12 +74,12 @@ export class AppController {
   public async create(
     @Request() request: Request & JwtPayloadRequest,
     @Body() requestBody: RequestCreateDto
-  ): Promise<MetaResponseDto | TaskResponseDto | ErrorResponseDto> {
+  ): Promise<SuccessResponseDto | TaskResponseDto | ErrorResponseDto> {
     //Perform all necessary actions here
 
     return {
       id: "hoster_order_product_id",
-      item_meta: {
+      item_data: {
         //your meta data
       },
     };
@@ -115,12 +115,12 @@ export class AppController {
   async upgrade(
     @Request() request: Request & JwtPayloadRequest,
     @Body() requestBody: RequestDto
-  ): Promise<MetaResponseDto | TaskResponseDto | ErrorResponseDto> {
+  ): Promise<SuccessResponseDto | TaskResponseDto | ErrorResponseDto> {
     //Perform all necessary actions here
 
     return {
       id: "hoster_order_product_id",
-      item_meta: {
+      item_data: {
         //your meta data
       },
     };
@@ -136,12 +136,12 @@ export class AppController {
   async downgrade(
     @Request() request: Request & JwtPayloadRequest,
     @Body() requestBody: RequestDto
-  ): Promise<MetaResponseDto | TaskResponseDto | ErrorResponseDto> {
+  ): Promise<SuccessResponseDto | TaskResponseDto | ErrorResponseDto> {
     //Perform all necessary actions here
 
     return {
       id: "hoster_order_product_id",
-      item_meta: {
+      item_data: {
         // your meta data
       },
     };
