@@ -109,6 +109,14 @@ export class FieldDto {
   remoteValidation: boolean;
 
   @ApiProperty({
+    type: String,
+    description: "The error message returned during validation",
+    example: "Station frequency can only be between numbers 99 to 120",
+    title: "Error message"
+  })
+  error: string = null;
+
+  @ApiProperty({
     description: 'If dynamic addon is set to true it means that this particular addon/attribute is dynamic and its values depend on other attributes/addons. This will trigger a call from the hoster to the integration in the dynamic-addon path, which will return the actual fields affected.',
     example: true,
     title: 'Dynamic Addon'

@@ -4,8 +4,6 @@ import { IsMongoId } from "class-validator";
 import { FieldDto } from "./field.dto";
 import { LabelTypeEnum } from "src/enums/label.type.enum";
 
-
-
 export class InfoResponseDto {
   @ApiProperty({
     type: ProviderInfoDto,
@@ -13,48 +11,52 @@ export class InfoResponseDto {
   info: ProviderInfoDto;
 }
 
-export class MetaResponseDto  {
+export class SuccessResponseDto {
   @IsMongoId()
   @ApiProperty({
     type: String,
     example: "5ce45d7606444f199acfba1e",
-    title: 'Id of the product/service owned by the user',
-    description: 'Id of the product/service owned by the user'
+    title: "Id of the product/service owned by the user",
+    description: "Id of the product/service owned by the user",
   })
   id: string;
 
   @ApiProperty({
     type: Object,
-    additionalProperties: { type: 'string' },
-    example: [{
-      station_id: 'This is your Station Id',
-      name: "This is your Station Name",
-      login_email: "This is your Station Login Email for login via browser",
-      login_password: "This is your Station Login Password for login via browser",
-      login_url: "This is the Station Login Url",
-      source_password: "This is your source password for streaming",
-      port: "This is the Port used to connect to the specific azuracast station",
-      mount_point: "This is the mountpoint of the specific Station",
-    }],
+    additionalProperties: { type: "string" },
+    example: [
+      {
+        station_id: "This is your Station Id",
+        name: "This is your Station Name",
+        login_email: "This is your Station Login Email for login via browser",
+        login_password:
+          "This is your Station Login Password for login via browser",
+        login_url: "This is the Station Login Url",
+        source_password: "This is your source password for streaming",
+        port: "This is the Port used to connect to the specific azuracast station",
+        mount_point: "This is the mountpoint of the specific Station",
+      },
+    ],
     required: true,
     readOnly: true,
-    description: "These are all necessary information of the product and are returned during product creation. The <*>(key) is the name of the information and the value(string) is the description of it. For example when an azuracast station product is created the returnMetaKeys will be station_id,name, login_url,login_email,login_password,source_password,port,mount_point.This information is stored on the Hoster and are sent back to the Provider in every POST"
-  
+    description:
+      "These are all necessary information of the product and are returned during product creation. The <*>(key) is the name of the information and the value(string) is the description of it. For example when an azuracast station product is created the returnMetaKeys will be station_id,name, login_url,login_email,login_password,source_password,port,mount_point.This information is stored on the Hoster and are sent back to the Provider in every POST",
   })
-  item_meta?: Record<string, any>;
+  item_data?: Record<string, any>;
 }
 
 export class TaskResponseDto {
   @ApiProperty({
     type: String,
-    required:true,
+    required: true,
     readOnly: true,
-    description: "This is the taskId returned by the provider when an operation cannot be done immediately by the provider, thus indicating that the operation has started."
+    description:
+      "This is the taskId returned by the provider when an operation cannot be done immediately by the provider, thus indicating that the operation has started.",
   })
   taskId: String;
 }
 
-export class ErrorResponseDto  {
+export class ErrorResponseDto {
   @ApiResponseProperty({
     type: String,
     example: "5ce45d7606444f199acfba1e",
@@ -67,12 +69,12 @@ export class ErrorResponseDto  {
   errors?: string[] | string;
 }
 
-export class BooleanResponseDto{
+export class BooleanResponseDto {
   @ApiProperty({
     type: String,
     example: "5ce45d7606444f199acfba1e",
-    title: 'Id of the product/service owned by the user',
-    description: 'Id of the product/service owned by the user'
+    title: "Id of the product/service owned by the user",
+    description: "Id of the product/service owned by the user",
   })
   id: string;
 
@@ -92,7 +94,7 @@ export class ValidateResponseDto {
 
   @ApiResponseProperty({
     type: String,
-    example: 'Some Message'
+    example: "Some Message",
   })
   message?: string;
 
@@ -133,5 +135,5 @@ export class DynamicAddonResponse {
       },
     ],
   })
-  fields?: FieldDto[]
+  fields?: FieldDto[];
 }

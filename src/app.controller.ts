@@ -34,7 +34,7 @@ import {
   RequestCreateDto,
 } from "./dtos/request.dto";
 import {
-  MetaResponseDto,
+  SuccessResponseDto,
   ValidateResponseDto,
   InfoResponseDto,
   TaskResponseDto,
@@ -50,6 +50,7 @@ import { LabelTypeEnum } from "./enums/label.type.enum";
 import { ApiExceptionFilter } from "./api.exception.filter";
 import { TasksService } from "./scheduler.service";
 import { IntervalEnum } from "./enums/interval.enum";
+import { FieldDto } from "./dtos/field.dto";
 
 @Controller()
 @ApiBearerAuth("JWT-auth")
@@ -96,7 +97,9 @@ export class AppController {
    * @returns Promise with MetaResponseDto|TaskResponseDto|ErrorResponseDto
    */
   @ApiOkResponse({
-    schema: { oneOf: refs(MetaResponseDto, TaskResponseDto, ErrorResponseDto) },
+    schema: {
+      oneOf: refs(SuccessResponseDto, TaskResponseDto, ErrorResponseDto),
+    },
   })
   @ApiTags("Product")
   @ApiBody({ type: RequestCreateDto })
@@ -110,12 +113,12 @@ export class AppController {
   public async create(
     @Request() request: Request & JwtPayloadRequest,
     @Body() requestBody: RequestCreateDto
-  ): Promise<MetaResponseDto | TaskResponseDto | ErrorResponseDto> {
+  ): Promise<SuccessResponseDto | TaskResponseDto | ErrorResponseDto> {
     //Perform all necessary actions here
 
     return {
       id: "hoster_order_product_id",
-      item_meta: {
+      item_data: {
         //your meta data
       },
     };
@@ -157,7 +160,9 @@ export class AppController {
    * @returns Promise with MetaResponseDto|TaskResponseDto|ErrorResponseDto
    */
   @ApiOkResponse({
-    schema: { oneOf: refs(MetaResponseDto, TaskResponseDto, ErrorResponseDto) },
+    schema: {
+      oneOf: refs(SuccessResponseDto, TaskResponseDto, ErrorResponseDto),
+    },
   })
   @ApiTags("Product")
   @ApiOperation({
@@ -170,12 +175,12 @@ export class AppController {
   async upgrade(
     @Request() request: Request & JwtPayloadRequest,
     @Body() requestBody: RequestDto
-  ): Promise<MetaResponseDto | TaskResponseDto | ErrorResponseDto> {
+  ): Promise<SuccessResponseDto | TaskResponseDto | ErrorResponseDto> {
     //Perform all necessary actions here
 
     return {
       id: "hoster_order_product_id",
-      item_meta: {
+      item_data: {
         //your meta data
       },
     };
@@ -187,7 +192,9 @@ export class AppController {
    * @returns Promise with MetaResponseDto|TaskResponseDto|ErrorResponseDto
    */
   @ApiOkResponse({
-    schema: { oneOf: refs(MetaResponseDto, TaskResponseDto, ErrorResponseDto) },
+    schema: {
+      oneOf: refs(SuccessResponseDto, TaskResponseDto, ErrorResponseDto),
+    },
   })
   @ApiTags("Product")
   @ApiOperation({
@@ -200,12 +207,12 @@ export class AppController {
   async downgrade(
     @Request() request: Request & JwtPayloadRequest,
     @Body() requestBody: RequestDto
-  ): Promise<MetaResponseDto | TaskResponseDto | ErrorResponseDto> {
+  ): Promise<SuccessResponseDto | TaskResponseDto | ErrorResponseDto> {
     //Perform all necessary actions here
 
     return {
       id: "hoster_order_product_id",
-      item_meta: {
+      item_data: {
         // your meta data
       },
     };
@@ -439,7 +446,8 @@ export class AppController {
           hidden: false,
           regexValidation: "",
           remoteValidation: false,
-        },
+          error: null,
+        } as FieldDto,
       ],
     };
   }

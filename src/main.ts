@@ -8,7 +8,7 @@ import {
   ValidateResponseDto,
   ErrorResponseDto,
   InfoResponseDto,
-  MetaResponseDto,
+  SuccessResponseDto,
   TaskResponseDto,
 } from "./dtos/responses.dto";
 import { PayPerUseRequest } from "./dtos/request.dto";
@@ -49,7 +49,7 @@ async function bootstrap() {
       PayPerUseRequest,
       FieldDto,
       TaskResponseDto,
-      MetaResponseDto,
+      SuccessResponseDto,
       ErrorResponseDto,
       InfoResponseDto,
       ValidateResponseDto,
