@@ -19,14 +19,17 @@ export class AuthGuard implements CanActivate {
       throw new UnauthorizedException();
     }
     try {
-      const payload: JwtPayloadRequest = await this.jwtService.verifyAsync(token, {
+      const payload = await this.jwtService.verifyAsync(token, {
         secret: process.env.SERVICE_PROVIDER_TOKEN,
+        algorithms: ["HS256"],
       });
-
-      // Το payload περιέχει user_id, company_id, company_owner: boolean iat(ημερομηνία έκδοσης jwt) exp(ημερομηνία λήξης jwt)
-      request["user"] = payload;
+      if (payload.user.integration_id === process.env.INTEGRATION_ID) {
+        request["user"] = payload.user;
+      } else {
+        throw new Error("Invalid authentication token");
+      }
     } catch (err) {
-      throw new UnauthorizedException();
+      throw new UnauthorizedException(err.message);
     }
     return true;
   }

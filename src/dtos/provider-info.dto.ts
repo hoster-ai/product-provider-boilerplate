@@ -2,6 +2,7 @@
 import { FieldDto } from "./field.dto";
 import { IsDefined } from "class-validator";
 import { UnitDto } from "./unit.dto";
+import { IntegrationActionsEnum } from "../enums/integrationActions.enum";
 
 export class DynamicPriceInfoDto {
   key: string;
@@ -31,7 +32,7 @@ class MenuItemDto extends TabDto {
   icon: string;
 }
 
-export class ProviderInfoDto {
+export class IntegrationInfoDto {
   name: string;
 
   logo?: string;
@@ -40,7 +41,11 @@ export class ProviderInfoDto {
 
   product_attributes?: FieldDto[];
 
-  addons?: FieldDto[];
+  item_attributes?: FieldDto[];
+
+  listen_events?: string[];
+
+  supportedActions: IntegrationActionsEnum[];
 
   productTabs?: TabDto[];
 

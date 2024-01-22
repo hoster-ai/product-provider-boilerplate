@@ -5,6 +5,7 @@ import { AuthModule } from "./auth/auth.module";
 import { HttpModule } from "@nestjs/axios";
 import { TasksService } from "./scheduler.service";
 import { ScheduleModule } from "@nestjs/schedule";
+import { TasksModule } from "./modules/tasks/tasks.module";
 
 @Module({
   imports: [
@@ -14,6 +15,7 @@ import { ScheduleModule } from "@nestjs/schedule";
     }),
     ScheduleModule.forRoot(),
     HttpModule,
+    TasksModule,
   ],
   controllers: [AppController /**your Controllers here*/],
   providers: [TasksService /**your Services here */],

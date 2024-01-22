@@ -28,7 +28,7 @@ export class FieldDto {
 
   error: string = null;
 
-  dynamicAddon?: boolean = false;
+  // dynamicAddon?: boolean = false;
 
   hideOnPayPerUse?: boolean = false;
 }

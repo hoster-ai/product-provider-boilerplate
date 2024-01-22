@@ -32,7 +32,7 @@ export class ProductDataDto {
   product_attributes: Record<string, any>;
 
   @IsDefined()
-  item_addons: Record<string, any>;
+  item_attributes: Record<string, any>;
 
   @IsDefined()
   item_meta?: Record<string, any>;

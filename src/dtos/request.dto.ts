@@ -23,8 +23,6 @@ export class RequestCreateDto extends OmitType(RequestDto, [
 ]) {}
 
 export class ValidateRequestDto {
-  userData: UserDataDto;
-  productData: ProductDataDto;
   fieldToBeValidated: string;
   fields: Record<string, any>;
 }

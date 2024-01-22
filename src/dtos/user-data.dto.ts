@@ -83,4 +83,7 @@ export class UserDataDto {
   @MinLength(0)
   @MaxLength(250)
   state?: string;
+
+  @IsOptional()
+  vatNumber?: string;
 }

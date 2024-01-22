@@ -57,8 +57,7 @@ export class AppController {
     return {
       info: {
         name: "MyProduct",
-
-        //...
+        supportedActions: []
       },
     };
   }

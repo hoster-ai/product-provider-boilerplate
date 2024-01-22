@@ -1,9 +1,9 @@
-import { ProviderInfoDto } from "./provider-info.dto";
+import { IntegrationInfoDto } from "./provider-info.dto";
 import { IsMongoId } from "class-validator";
 import { FieldDto } from "./field.dto";
 
 export class InfoResponseDto {
-  info: ProviderInfoDto;
+  info: IntegrationInfoDto;
 }
 
 export class SuccessResponseDto {
@@ -14,6 +14,8 @@ export class SuccessResponseDto {
 }
 
 export class TaskResponseDto {
+  id: string;
+
   taskId: String;
 }
 
